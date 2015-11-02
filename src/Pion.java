@@ -1,10 +1,10 @@
 /**
  * Created by maaj on 2015-11-02.
  */
-public abstract class Pion {
+public class Pion {
 
     //False=noir et True=blanc
-    boolean couleur=false;
+    boolean couleur;
     //Case caseActive;
 
 }

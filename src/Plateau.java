@@ -6,5 +6,10 @@ import java.util.Hashtable;
 public class Plateau {
 
     Hashtable listeCase;
-    Hashtable caseOccuper;
+    Hashtable casesOccupees;
+
+    public Plateau(Hashtable listeCase, Hashtable casesOccupees){
+        this.listeCase = listeCase;
+        this.casesOccupees = casesOccupees;
+    }
 }

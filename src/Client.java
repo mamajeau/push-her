@@ -1,15 +1,9 @@
-
-
 import java.io.*;
 import java.net.*;
 
 
-class Client
-{
+class Client {
     public static void main(String[] args) {
-
-        //Creation du jeu
-        Jeu jeu=new Jeu();
 
         Socket MyClient;
         BufferedInputStream input;
@@ -45,29 +39,32 @@ class Client
                             y++;
                         }
                     }
-
+                    Jeu jeu = new Jeu();
+                    //Initialisation du jeu
+                    jeu.construirePlateau(board);
+                    //=========================
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
-                    String move = null;
-                    move = console.readLine();
-                    output.write(move.getBytes(),0,move.length());
-                    output.flush();
-                }
-                // Début de la partie en joueur Noir
-                if(cmd == '2'){
-                    System.out.println("Nouvelle partie! Vous jouer noir, attendez le coup des blancs");
-                    byte[] aBuffer = new byte[1024];
+                        String move = null;
+                        move = console.readLine();
+                        output.write(move.getBytes(),0,move.length());
+                        output.flush();
+                    }
+                    // Début de la partie en joueur Noir
+                    if(cmd == '2'){
+                        System.out.println("Nouvelle partie! Vous jouer noir, attendez le coup des blancs");
+                        byte[] aBuffer = new byte[1024];
 
-                    int size = input.available();
-                    //System.out.println("size " + size);
-                    input.read(aBuffer,0,size);
-                    String s = new String(aBuffer).trim();
-                    System.out.println(s);
-                    String[] boardValues;
-                    boardValues = s.split(" ");
-                    int x=0,y=0;
-                    for(int i=0; i<boardValues.length;i++){
-                        board[x][y] = Integer.parseInt(boardValues[i]);
-                        x++;
+                        int size = input.available();
+                        //System.out.println("size " + size);
+                        input.read(aBuffer,0,size);
+                        String s = new String(aBuffer).trim();
+                        System.out.println(s);
+                        String[] boardValues;
+                        boardValues = s.split(" ");
+                        int x=0,y=0;
+                        for(int i=0; i<boardValues.length;i++){
+                            board[x][y] = Integer.parseInt(boardValues[i]);
+                            x++;
                         if(x == 8){
                             x = 0;
                             y++;
@@ -111,3 +108,4 @@ class Client
 
     }
 }
+

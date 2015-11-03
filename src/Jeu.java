@@ -4,11 +4,14 @@ import java.util.Hashtable;
  * Created by maaj on 2015-11-02.
  */
 public class Jeu {
-    Plateau plateau;
+    private Plateau plateau;
+    private Hashtable listeCase;
+    private Hashtable casesOccupees;
 
     public void construirePlateau(int[][] board) {
-        Hashtable listeCase = new Hashtable();
-        Hashtable casesOccupees = new Hashtable();
+        System.out.println("construction Plateau");
+        listeCase = new Hashtable();
+        casesOccupees = new Hashtable();
         for (int i=0; i<8; i++){
             for (int j=0; j<8 ;j++){
                 if (board[i][j] == 4){

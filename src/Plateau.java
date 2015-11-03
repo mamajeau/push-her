@@ -30,16 +30,30 @@ public class Plateau {
                 {
                     if (caseSimple.occupant instanceof Pousse)
                     {
-                        ligne+="p";
+                        if(caseSimple.occupant.couleur)
+                        {
+                            ligne+="pb";
+                        }
+                        else
+                        {
+                            ligne+="pn";
+                        }
                     }
                     if (caseSimple.occupant instanceof Pousseur)
                     {
-                        ligne+="P";
+                        if(caseSimple.occupant.couleur)
+                        {
+                            ligne+="Pb";
+                        }
+                        else
+                        {
+                            ligne+="Pn";
+                        }
                     }
                 }
                 else
                 {
-                    ligne+="n";
+                    ligne+="nl";
                 }
             }
             System.out.println(ligne);

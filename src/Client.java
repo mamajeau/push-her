@@ -9,6 +9,7 @@ class Client {
         BufferedInputStream input;
         BufferedOutputStream output;
         int[][] board = new int[8][8];
+        Jeu jeu=null;
         try {
             MyClient = new Socket("localhost", 8888);
             input    = new BufferedInputStream(MyClient.getInputStream());
@@ -18,6 +19,9 @@ class Client {
                 char cmd = 0;
 
                 cmd = (char)input.read();
+
+
+
 
                 // Début de la partie en joueur blanc
                 if(cmd == '1'){
@@ -39,13 +43,19 @@ class Client {
                             y++;
                         }
                     }
-                    Jeu jeu = new Jeu();
+
+                    jeu = new Jeu();
                     //Initialisation du jeu
                     jeu.construirePlateau(board);
+                    jeu.construireIA();
                     //=========================
+
+                    String coup=jeu.ia.jouerCoup();
+
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
                         String move = null;
-                        move = console.readLine();
+                        //move = console.readLine();
+                        move=coup;
                         output.write(move.getBytes(),0,move.length());
                         output.flush();
                     }
@@ -70,9 +80,10 @@ class Client {
                             y++;
                         }
                     }
-                        Jeu jeu = new Jeu();
+                        jeu = new Jeu();
                         //Initialisation du jeu
                         jeu.construirePlateau(board);
+                        jeu.construireIA();
                         //=========================
                 }
 
@@ -89,8 +100,12 @@ class Client {
                     String s = new String(aBuffer);
                     System.out.println("Dernier coup : "+ s);
                     System.out.println("Entrez votre coup : ");
+
+                    String coup=jeu.ia.jouerCoup();
                     String move = null;
-                    move = console.readLine();
+                    //move = console.readLine();
+                    move=coup;
+
                     output.write(move.getBytes(),0,move.length());
                     output.flush();
 
@@ -98,8 +113,11 @@ class Client {
                 // Le dernier coup est invalide
                 if(cmd == '4'){
                     System.out.println("Coup invalide, entrez un nouveau coup : ");
+
+                    String coup=jeu.ia.jouerCoup();
                     String move = null;
-                    move = console.readLine();
+                    //move = console.readLine();
+                    move=coup;
                     output.write(move.getBytes(),0,move.length());
                     output.flush();
 

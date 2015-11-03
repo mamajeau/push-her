@@ -4,13 +4,18 @@ import java.util.Hashtable;
  * Created by maaj on 2015-11-02.
  */
 public class Jeu {
-    private Plateau plateau;
+    public Plateau plateau;
     private Hashtable listeCase;
     private Hashtable casesOccupees;
     public Case[][]boardCase=new Case[8][8];
+    public IA ia;
+
+    public void construireIA()
+    {
+        this.ia=new IA(this.plateau);
+    }
 
     public void construirePlateau(int[][] board) {
-        System.out.println("construction Plateau");
         listeCase = new Hashtable();
         casesOccupees = new Hashtable();
         for (int i=0; i<8; i++){

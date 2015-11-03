@@ -7,9 +7,11 @@ public class Plateau {
 
     Hashtable listeCase;
     Hashtable casesOccupees;
+    int[][] board;
 
-    public Plateau(Hashtable listeCase, Hashtable casesOccupees){
+    public Plateau(Hashtable listeCase, Hashtable casesOccupees, int[][] board){
         this.listeCase = listeCase;
         this.casesOccupees = casesOccupees;
+        this.board = board;
     }
 }

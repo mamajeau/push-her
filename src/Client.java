@@ -70,6 +70,10 @@ class Client {
                             y++;
                         }
                     }
+                        Jeu jeu = new Jeu();
+                        //Initialisation du jeu
+                        jeu.construirePlateau(board);
+                        //=========================
                 }
 
 

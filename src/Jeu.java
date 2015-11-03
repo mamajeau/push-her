@@ -25,7 +25,7 @@ public class Jeu {
                     listeCase.put(id,c);
                     casesOccupees.put(id,c);
                 }
-                if (board[i][j] == 2){
+                if (board[i][j] == 1){
                     String id = this.getId(i,j);
                     Pion p = new Pousse (false);
                     Case c = new Case(id, p);
@@ -46,12 +46,12 @@ public class Jeu {
                 }
             }
         }
-        this.plateau = new Plateau(listeCase, casesOccupees);
+        this.plateau = new Plateau(listeCase, casesOccupees, board);
     }
 
     private String getId(int ligne, int colonne) {
         String id = "";
-        switch (colonne){
+        switch (ligne){
             case 0: id += "A";
                 break;
             case 1: id += "B";
@@ -69,7 +69,7 @@ public class Jeu {
             case 7: id += "H";
                 break;
         }
-        switch (ligne){
+        switch (colonne){
             case 0: id += "8";
                 break;
             case 1: id += "7";

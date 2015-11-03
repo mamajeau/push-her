@@ -15,7 +15,19 @@ public class Plateau {
         this.casesOccupees = casesOccupees;
         this.board = board;
 
-        listeCase();
+        afficherBoard();
+    }
+
+    //petite fonction pour passer  travers le board pour afficher les cases
+    public void afficherBoard()
+    {
+        for (int i=0; i<8; i++) {
+            String ligne="";
+            for (int j = 0; j < 8; j++) {
+                ligne=ligne+Integer.toString(board[j][i]);
+            }
+            System.out.println(ligne);
+        }
     }
 
     //Petite fonction qui permet de passer a travers la liste de pion et qui donne leur case et le nombre de case

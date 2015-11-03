@@ -7,6 +7,7 @@ public class Jeu {
     private Plateau plateau;
     private Hashtable listeCase;
     private Hashtable casesOccupees;
+    public Case[][]boardCase=new Case[8][8];
 
     public void construirePlateau(int[][] board) {
         System.out.println("construction Plateau");
@@ -20,6 +21,7 @@ public class Jeu {
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
                     casesOccupees.put(id, c);
+                    boardCase[i][j]=c;
                 }
                 if (board[i][j] == 3){
                     String id = this.getId(i,j);
@@ -27,6 +29,7 @@ public class Jeu {
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
                     casesOccupees.put(id,c);
+                    boardCase[i][j]=c;
                 }
                 if (board[i][j] == 1){
                     String id = this.getId(i,j);
@@ -34,6 +37,7 @@ public class Jeu {
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
                     casesOccupees.put(id,c);
+                    boardCase[i][j]=c;
                 }
                 if (board[i][j] == 2){
                     String id = this.getId(i,j);
@@ -41,15 +45,17 @@ public class Jeu {
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
                     casesOccupees.put(id,c);
+                    boardCase[i][j]=c;
                 }
                 if (board[i][j] == 0){
                     String id = this.getId(i,j);
                     Case c = new Case(id, null);
                     listeCase.put(id,c);
+                    boardCase[i][j]=c;
                 }
             }
         }
-        this.plateau = new Plateau(listeCase, casesOccupees, board);
+        this.plateau = new Plateau(listeCase, casesOccupees, boardCase);
     }
 
     private String getId(int ligne, int colonne) {

@@ -8,9 +8,9 @@ public class Plateau {
 
     Hashtable listeCase;
     Hashtable casesOccupees;
-    int[][] board;
+    Case[][] board;
 
-    public Plateau(Hashtable listeCase, Hashtable casesOccupees, int[][] board){
+    public Plateau(Hashtable listeCase, Hashtable casesOccupees, Case[][] board){
         this.listeCase = listeCase;
         this.casesOccupees = casesOccupees;
         this.board = board;
@@ -24,7 +24,23 @@ public class Plateau {
         for (int i=0; i<8; i++) {
             String ligne="";
             for (int j = 0; j < 8; j++) {
-                ligne=ligne+Integer.toString(board[j][i]);
+                //ligne=ligne+Integer.toString(board[j][i]);
+                Case caseSimple=board[j][i];
+                if (caseSimple.occupant != null)
+                {
+                    if (caseSimple.occupant instanceof Pousse)
+                    {
+                        ligne+="p";
+                    }
+                    if (caseSimple.occupant instanceof Pousseur)
+                    {
+                        ligne+="P";
+                    }
+                }
+                else
+                {
+                    ligne+="n";
+                }
             }
             System.out.println(ligne);
         }

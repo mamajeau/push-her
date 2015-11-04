@@ -6,6 +6,4 @@ public class Pousse extends Pion {
     public Pousse (boolean couleur){
         super.couleur = couleur;
     }
-
-
 }

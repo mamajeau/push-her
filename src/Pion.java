@@ -7,5 +7,4 @@ public class Pion {
     boolean couleur;
     //Case caseActive;
 
-
 }

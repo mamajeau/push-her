@@ -44,8 +44,4 @@ public class IA {
 
         return deplacement;
     }
-
-
-
-
 }

@@ -7,13 +7,14 @@ import java.util.Hashtable;
 public class Plateau {
 
     Hashtable listeCase;
-    Hashtable casesOccupees;
-    Hashtable casesValides;
+    Hashtable casesOccupeesBlanches;
+    Hashtable casesOccupeesNoires;
     Case[][] board;
 
-    public Plateau(Hashtable listeCase, Hashtable casesOccupees, Case[][] board){
+    public Plateau(Hashtable listeCase, Hashtable casesOccupeesBlanches,Hashtable casesOccupeesNoires, Case[][] board){
         this.listeCase = listeCase;
-        this.casesOccupees = casesOccupees;
+        this.casesOccupeesBlanches = casesOccupeesBlanches;
+        this.casesOccupeesNoires = casesOccupeesNoires;
         this.board = board;
 
         afficherBoard();
@@ -62,9 +63,9 @@ public class Plateau {
     }
 
     //Petite fonction qui permet de passer a travers la liste de pion et qui donne leur case et le nombre de case
-    public void listeCase()
+    public void listeCase(Hashtable listeCase)
     {
-        Hashtable liste=casesOccupees;
+        Hashtable liste=listeCase;
         Enumeration items = liste.keys();
         int nbPion=0;
 
@@ -79,23 +80,4 @@ public class Plateau {
         }
         System.out.println("Nombre de pion sur le tableau="+nbPion);
     }
-
-
-
-    public Case getOpposite(Case depart, Case arriver, boolean couleurJoueur){
-
-        if (couleurJoueur){
-
-           //Blanc
-
-
-
-        }else{
-            //Noir
-        }
-
-        return null;
-    }
-
-
 }

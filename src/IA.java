@@ -6,19 +6,11 @@ import java.util.Random;
  */
 public class IA {
     Plateau plateau;
-    Hashtable convertisseur=new Hashtable();
+    Convertisseur conv = Convertisseur.getInstance();
 
     public IA(Plateau plateau)
     {
         this.plateau=plateau;
-        this.convertisseur.put(0,"A");
-        this.convertisseur.put(1,"B");
-        this.convertisseur.put(2,"C");
-        this.convertisseur.put(3,"D");
-        this.convertisseur.put(4,"E");
-        this.convertisseur.put(5,"F");
-        this.convertisseur.put(6,"G");
-        this.convertisseur.put(7,"H");
     }
 
     public String jouerCoup()
@@ -34,10 +26,10 @@ public class IA {
         System.out.println("arriver"+arriver);
         */
 
-        Case depart=(Case)plateau.listeCase.get((this.convertisseur.get(randomInt))+Integer.toString(ligne));
+        Case depart=(Case)plateau.listeCase.get((this.conv.ChiffreALettre(randomInt))+Integer.toString(ligne));
 
         //Le -1 permet de faire un random entre -1,0,1. Donc gauche,avant,droite
-        Case arriver=(Case)plateau.listeCase.get(this.convertisseur.get(randomInt+(randomGenerator.nextInt(3)-1))+Integer.toString(ligne+1));
+        Case arriver=(Case)plateau.listeCase.get(this.conv.ChiffreALettre(randomInt+(randomGenerator.nextInt(3)-1))+Integer.toString(ligne+1));
 
         Mouvement mouvement=new Mouvement(this.plateau);
         String deplacement=mouvement.deplacer(depart,arriver);

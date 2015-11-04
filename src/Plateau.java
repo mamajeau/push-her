@@ -10,6 +10,7 @@ public class Plateau {
     Hashtable casesOccupees;
     Hashtable casesValides;
     Case[][] board;
+    Convertisseur conv = Convertisseur.getInstance();
 
     public Plateau(Hashtable listeCase, Hashtable casesOccupees, Case[][] board){
         this.listeCase = listeCase;
@@ -84,14 +85,39 @@ public class Plateau {
 
     public Case getOpposite(Case depart, Case arriver, boolean couleurJoueur){
 
+        int arriver_x = conv.LettreAChiffre(arriver.id.charAt(0));
+        int arriver_y = Character.digit(arriver.id.charAt(1),10);
+
+        int depart_x = conv.LettreAChiffre(depart.id.charAt(0));
+        int depart_y = Character.digit(depart.id.charAt(1),10);
+
+        int deplacementX = arriver_x - depart_x;
+        int deplacementY = arriver_y - depart_y;
+
         if (couleurJoueur){
 
-           //Blanc
-
-
+        if(deplacementX == -1 && deplacementY == 1)
+        {
+            return board[depart_x+1][depart_y-1];
+        }else if (deplacementX == 0 && deplacementY == 1)
+        {
+            return board[depart_x][depart_y-1];
+        }else if (deplacementX == 1 && deplacementY == 1)
+        {
+            return board[depart_x-1][depart_y-1];
+        }
 
         }else{
-            //Noir
+            if(deplacementX == -1 && deplacementY == -1)
+            {
+                return board[depart_x+1][depart_y+1];
+            }else if (deplacementX == 0 && deplacementY == -1)
+            {
+                return board[depart_x][depart_y+1];
+            }else if (deplacementX == 1 && deplacementY == -1)
+            {
+                return board[depart_x-1][depart_y+1];
+            }
         }
 
         return null;

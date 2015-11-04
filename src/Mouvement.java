@@ -13,19 +13,10 @@ public class Mouvement {
 
     public Mouvement(Plateau plateau)
     {
-
         this.plateau=plateau;
-
-        this.convertisseur.put(0,"A");
-        this.convertisseur.put(1,"B");
-        this.convertisseur.put(2,"C");
-        this.convertisseur.put(3,"D");
-        this.convertisseur.put(4,"E");
-        this.convertisseur.put(5,"F");
-        this.convertisseur.put(6,"G");
-        this.convertisseur.put(7,"H");
     }
 
+    //Fonction pour deplacer sur les cases et faire la verification
     public String deplacer(Case depart,Case arriver)
     {
         this.depart=depart;
@@ -40,9 +31,18 @@ public class Mouvement {
         return depart.id+arriver.id;
     }
 
+    //Fonction pour la mise a jour des mouvements de l'adversaire dans notre board
     public void updateJoueur(String coordonner)
     {
-        System.out.println("joueur: "+coordonner);
+        //Couper en deux la coordonner
+        coordonner=coordonner.replaceAll("\\s","");
+        coordonner=coordonner.replaceAll("[\u0000-\u001f]", "");
+        String[] sousResultat=coordonner.split("-");
+
+        Case caseDepart=(Case)plateau.listeCase.get(sousResultat[0]);
+        Case caseArriver=(Case)plateau.listeCase.get(sousResultat[1]);
+
+        deplacer(caseDepart,caseArriver);
     }
 
 }

@@ -20,9 +20,6 @@ class Client {
 
                 cmd = (char)input.read();
 
-
-
-
                 // Début de la partie en joueur blanc
                 if(cmd == '1'){
                     byte[] aBuffer = new byte[1024];
@@ -102,6 +99,7 @@ class Client {
                     //Coup du joueur humain
                     Mouvement mouvementJoueur=new Mouvement(jeu.plateau);
                     mouvementJoueur.updateJoueur(s);
+                    jeu.plateau.afficherBoard();
 
                     System.out.println("Dernier coup : "+ s);
                     System.out.println("Entrez votre coup : ");

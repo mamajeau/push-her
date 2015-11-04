@@ -6,7 +6,8 @@ import java.util.Hashtable;
 public class Jeu {
     public Plateau plateau;
     private Hashtable listeCase;
-    private Hashtable casesOccupees;
+    private Hashtable casesOccupeesNoires;
+    private Hashtable casesOccupeesBlanches;
     public Case[][]boardCase=new Case[8][8];
     public IA ia;
 
@@ -17,7 +18,8 @@ public class Jeu {
 
     public void construirePlateau(int[][] board) {
         listeCase = new Hashtable();
-        casesOccupees = new Hashtable();
+        casesOccupeesBlanches = new Hashtable();
+        casesOccupeesNoires = new Hashtable();
         for (int i=0; i<8; i++){
             for (int j=0; j<8 ;j++){
                 if (board[i][j] == 4){
@@ -25,7 +27,7 @@ public class Jeu {
                     Pion p = new Pousseur (true);
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
-                    casesOccupees.put(id, c);
+                    casesOccupeesBlanches.put(id, c);
                     boardCase[i][j]=c;
                 }
                 if (board[i][j] == 3){
@@ -33,7 +35,7 @@ public class Jeu {
                     Pion p = new Pousse (true);
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
-                    casesOccupees.put(id,c);
+                    casesOccupeesBlanches.put(id,c);
                     boardCase[i][j]=c;
                 }
                 if (board[i][j] == 1){
@@ -41,7 +43,7 @@ public class Jeu {
                     Pion p = new Pousse (false);
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
-                    casesOccupees.put(id,c);
+                    casesOccupeesNoires.put(id,c);
                     boardCase[i][j]=c;
                 }
                 if (board[i][j] == 2){
@@ -49,7 +51,7 @@ public class Jeu {
                     Pion p = new Pousseur (false);
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
-                    casesOccupees.put(id,c);
+                    casesOccupeesNoires.put(id,c);
                     boardCase[i][j]=c;
                 }
                 if (board[i][j] == 0){
@@ -60,7 +62,7 @@ public class Jeu {
                 }
             }
         }
-        this.plateau = new Plateau(listeCase, casesOccupees, boardCase);
+        this.plateau = new Plateau(listeCase,casesOccupeesBlanches ,casesOccupeesNoires, boardCase);
     }
 
     private String getId(int ligne, int colonne) {

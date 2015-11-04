@@ -23,10 +23,6 @@ public class Mouvement {
         this.arriver=arriver;
 
         //Verifier si ca marche
-       /* if(!this.coupValide(depart, arriver))
-        {
-            return "Coup Non Valide";
-        }*/
 
         //Deplacer dans les mapping
         arriver.occupant=depart.occupant;

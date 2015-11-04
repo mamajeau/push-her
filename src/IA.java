@@ -39,8 +39,8 @@ public class IA {
         //Le -1 permet de faire un random entre -1,0,1. Donc gauche,avant,droite
         Case arriver=(Case)plateau.listeCase.get(this.convertisseur.get(randomInt+(randomGenerator.nextInt(3)-1))+Integer.toString(ligne+1));
 
-        Mouvement mouvement=new Mouvement(depart,arriver,this.plateau);
-        String deplacement=mouvement.deplacer();
+        Mouvement mouvement=new Mouvement(this.plateau);
+        String deplacement=mouvement.deplacer(depart,arriver);
 
         return deplacement;
     }

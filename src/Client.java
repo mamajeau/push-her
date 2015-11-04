@@ -98,6 +98,11 @@ class Client {
                     input.read(aBuffer,0,size);
 
                     String s = new String(aBuffer);
+
+                    //Coup du joueur humain
+                    Mouvement mouvementJoueur=new Mouvement(jeu.plateau);
+                    mouvementJoueur.updateJoueur(s);
+
                     System.out.println("Dernier coup : "+ s);
                     System.out.println("Entrez votre coup : ");
 
@@ -108,7 +113,6 @@ class Client {
 
                     output.write(move.getBytes(),0,move.length());
                     output.flush();
-
                 }
                 // Le dernier coup est invalide
                 if(cmd == '4'){

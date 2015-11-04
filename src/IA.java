@@ -26,15 +26,22 @@ public class IA {
         int ligne=2;
         Random randomGenerator = new Random();
         int randomInt = randomGenerator.nextInt(7);
-        String depart=this.convertisseur.get(randomInt).toString();
-        depart=depart+Integer.toString(ligne);
-
+        /*String depart=this.convertisseur.get(randomInt).toString();
         String arriver=this.convertisseur.get(randomInt+(randomGenerator.nextInt(3)-1) ).toString();
+        depart=depart+Integer.toString(ligne);
         arriver=arriver+Integer.toString(ligne+1);
-
         System.out.println("depart"+depart);
         System.out.println("arriver"+arriver);
+        */
 
-        return depart+arriver;
+        Case depart=(Case)plateau.listeCase.get((this.convertisseur.get(randomInt))+Integer.toString(ligne));
+
+        //Le -1 permet de faire un random entre -1,0,1. Donc gauche,avant,droite
+        Case arriver=(Case)plateau.listeCase.get(this.convertisseur.get(randomInt+(randomGenerator.nextInt(3)-1))+Integer.toString(ligne+1));
+
+        Mouvement mouvement=new Mouvement(depart,arriver,this.plateau);
+        String deplacement=mouvement.deplacer();
+
+        return deplacement;
     }
 }

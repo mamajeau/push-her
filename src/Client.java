@@ -1,5 +1,7 @@
 import java.io.*;
 import java.net.*;
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
 
 
 class Client {
@@ -124,6 +126,10 @@ class Client {
                     output.flush();
 
                 }
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                }catch (InterruptedException e){}
+
             }
         }
         catch (IOException e) {

@@ -8,6 +8,7 @@ public class Plateau {
 
     Hashtable listeCase;
     Hashtable casesOccupees;
+    Hashtable casesValides;
     Case[][] board;
 
     public Plateau(Hashtable listeCase, Hashtable casesOccupees, Case[][] board){
@@ -78,4 +79,23 @@ public class Plateau {
         }
         System.out.println("Nombre de pion sur le tableau="+nbPion);
     }
+
+
+
+    public Case getOpposite(Case depart, Case arriver, boolean couleurJoueur){
+
+        if (couleurJoueur){
+
+           //Blanc
+
+
+
+        }else{
+            //Noir
+        }
+
+        return null;
+    }
+
+
 }

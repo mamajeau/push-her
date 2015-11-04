@@ -23,6 +23,10 @@ public class Mouvement {
         this.arriver=arriver;
 
         //Verifier si ca marche
+       /* if(!this.coupValide(depart, arriver))
+        {
+            return "Coup Non Valide";
+        }*/
 
         //Deplacer dans les mapping
         arriver.occupant=depart.occupant;
@@ -45,4 +49,29 @@ public class Mouvement {
         deplacer(caseDepart,caseArriver);
     }
 
+    /*
+    * 123
+    * 456
+    * 789
+    * */
+    public boolean coupValide(Case depart, Case arriver)
+    {
+        Pion joueur = depart.occupant;
+
+        if(joueur instanceof Pousseur)
+        {
+         if(arriver.occupant == null){ return true; }
+        }
+        else if(joueur instanceof Pousse)
+        {
+            boolean coulJ = true;
+            Case opp = plateau.getOpposite(depart, arriver, coulJ);
+            if(arriver.occupant == null && opp.occupant instanceof Pousseur && opp.occupant.couleur == coulJ)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

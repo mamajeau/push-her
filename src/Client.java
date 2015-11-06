@@ -8,6 +8,7 @@ class Client {
         Socket MyClient;
         BufferedInputStream input;
         BufferedOutputStream output;
+        Joueur joueur = new Joueur();
         int[][] board = new int[8][8];
         Jeu jeu=null;
         try {
@@ -22,6 +23,7 @@ class Client {
 
                 // Début de la partie en joueur blanc
                 if(cmd == '1'){
+                    joueur.couleur = true;
                     byte[] aBuffer = new byte[1024];
 
                     int size = input.available();
@@ -58,6 +60,7 @@ class Client {
                     }
                     // Début de la partie en joueur Noir
                     if(cmd == '2'){
+                        joueur.couleur = false;
                         System.out.println("Nouvelle partie! Vous jouer noir, attendez le coup des blancs");
                         byte[] aBuffer = new byte[1024];
 
@@ -97,11 +100,12 @@ class Client {
                     String s = new String(aBuffer);
 
                     //Coup du joueur humain
-                    Mouvement mouvementJoueur=new Mouvement(jeu.plateau);
-                    mouvementJoueur.updateJoueur(s);
+                   // Mouvement mouvementJoueur=new Mouvement(jeu.plateau);
+                   // mouvementJoueur.updateJoueur(s);
                     jeu.plateau.afficherBoard();
 
                     System.out.println("Dernier coup : "+ s);
+                    System.out.println(s);
                     System.out.println("Entrez votre coup : ");
 
                     String coup=jeu.ia.jouerCoup();

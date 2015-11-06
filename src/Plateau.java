@@ -81,7 +81,6 @@ public class Plateau {
         }
         System.out.println("Nombre de pion sur le tableau="+nbPion);
     }
-<<<<<<< HEAD
 
 
 

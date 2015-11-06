@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
@@ -35,7 +37,7 @@ public class Jeu {
                     Pion p = new Pousse (true);
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
-                    casesOccupeesBlanches.put(id,c);
+                    casesOccupeesBlanches.put(id, c);
                     boardCase[i][j]=c;
                 }
                 if (board[i][j] == 1){
@@ -43,7 +45,7 @@ public class Jeu {
                     Pion p = new Pousse (false);
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
-                    casesOccupeesNoires.put(id,c);
+                    casesOccupeesNoires.put(id, c);
                     boardCase[i][j]=c;
                 }
                 if (board[i][j] == 2){
@@ -51,7 +53,7 @@ public class Jeu {
                     Pion p = new Pousseur (false);
                     Case c = new Case(id, p);
                     listeCase.put(id,c);
-                    casesOccupeesNoires.put(id,c);
+                    casesOccupeesNoires.put(id, c);
                     boardCase[i][j]=c;
                 }
                 if (board[i][j] == 0){
@@ -63,6 +65,16 @@ public class Jeu {
             }
         }
         this.plateau = new Plateau(listeCase,casesOccupeesBlanches ,casesOccupeesNoires, boardCase);
+        Mouvement m = new Mouvement(plateau,boardCase);
+        Enumeration items = casesOccupeesBlanches.keys();
+        ArrayList<Mouvement> mouvementsPossibles = new ArrayList<Mouvement>();
+        while (items.hasMoreElements()){
+            Case c =(Case) casesOccupeesBlanches.get(items.nextElement());
+            ArrayList<Mouvement> tempo = m.coupValide(c);
+            for (int i=0; i<tempo.size();i++) {
+                mouvementsPossibles.add(tempo.get(i));
+            }
+        }
     }
 
     private String getId(int ligne, int colonne) {

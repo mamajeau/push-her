@@ -65,16 +65,17 @@ public class Jeu {
             }
         }
         this.plateau = new Plateau(listeCase,casesOccupeesBlanches ,casesOccupeesNoires, boardCase);
-        Mouvement m = new Mouvement(plateau,boardCase);
+        Mouvement m = new Mouvement(plateau);
         Enumeration items = casesOccupeesBlanches.keys();
-        ArrayList<Mouvement> mouvementsPossibles = new ArrayList<Mouvement>();
+        //Code de cath pour tout checker
+        /*ArrayList<Mouvement> mouvementsPossibles = new ArrayList<Mouvement>();
         while (items.hasMoreElements()){
             Case c =(Case) casesOccupeesBlanches.get(items.nextElement());
             ArrayList<Mouvement> tempo = m.coupValide(c);
             for (int i=0; i<tempo.size();i++) {
                 mouvementsPossibles.add(tempo.get(i));
             }
-        }
+        }*/
     }
 
     private String getId(int ligne, int colonne) {

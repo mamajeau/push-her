@@ -100,8 +100,8 @@ class Client {
                     String s = new String(aBuffer);
 
                     //Coup du joueur humain
-                   // Mouvement mouvementJoueur=new Mouvement(jeu.plateau);
-                   // mouvementJoueur.updateJoueur(s);
+                    Mouvement mouvementJoueur=new Mouvement(jeu.plateau);
+                    mouvementJoueur.updateJoueur(s);
                     jeu.plateau.afficherBoard();
 
                     System.out.println("Dernier coup : "+ s);

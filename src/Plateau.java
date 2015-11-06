@@ -18,7 +18,8 @@ public class Plateau {
         this.casesOccupeesNoires = casesOccupeesNoires;
         this.board = board;
 
-        afficherBoard();
+        //afficherBoard();
+        afficherCase();
     }
 
     //petite fonction pour passer  travers le board pour afficher les cases
@@ -58,6 +59,18 @@ public class Plateau {
                 {
                     ligne+="nl";
                 }
+            }
+            System.out.println(ligne);
+        }
+    }
+    public void afficherCase() {
+        for (int i = 0; i < 8; i++) {
+            String ligne = "";
+            for (int j = 0; j < 8; j++) {
+                //ligne=ligne+Integer.toString(board[j][i]);
+                Case caseSimple = board[i][j];
+                ligne+=caseSimple.id;
+
             }
             System.out.println(ligne);
         }

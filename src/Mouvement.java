@@ -15,10 +15,10 @@ public class Mouvement {
     int poids=0;
     Convertisseur convertisseur= Convertisseur.getInstance();
 
-    public Mouvement(Plateau plateau, Case[][]boardCase)
+    public Mouvement(Plateau plateau)
     {
         this.plateau=plateau;
-        this.boardCase = boardCase;
+        this.boardCase = plateau.board;
     }
     public Mouvement(Case depart, Case arrivee)
     {
@@ -54,6 +54,30 @@ public class Mouvement {
 
         deplacer(caseDepart,caseArriver);
     }
+    public void validerCoup(Case depart)
+    {
+        Pion pion=depart.occupant;
+        boolean coulJ = depart.occupant.couleur;
+        String id = depart.id;
+        char letter = id.charAt(0);
+        int colonne = convertisseur.LettreAChiffre(letter);
+        String stringLigne =  ""+id.charAt(1);
+        int ligne = Integer.parseInt(stringLigne);
+        ArrayList<Mouvement> arrayMouvements = new ArrayList<Mouvement>();
+
+        int ligneTempo=ligne+1;
+        int colonneTempo=colonne+1;
+
+        System.out.println("Infomation Mouvement");
+        System.out.print(id);
+        System.out.println("ligne: "+ligne);
+        System.out.println("Colonne: "+colonne);
+
+
+
+
+    }
+
 
     /*
     * 123
@@ -65,12 +89,13 @@ public class Mouvement {
         Pion pion = depart.occupant;
         boolean coulJ = depart.occupant.couleur;
         String id = depart.id;
-        System.out.println(id);
         char letter = id.charAt(0);
         int colonne = convertisseur.LettreAChiffre(letter);
         String stringLigne =  ""+id.charAt(1);
         int ligne = Integer.parseInt(stringLigne);
         ArrayList<Mouvement> arrayMouvements = new ArrayList<Mouvement>();
+
+
         if(pion instanceof Pousseur)
         {
             //Si le pousseur est blanc
@@ -203,17 +228,28 @@ public class Mouvement {
                 }
             }
         }
+
         else if(pion instanceof Pousse)
         {
-
             //Si le pousseur est blanc
             if (coulJ == true){
                 if (ligne<7){
-
                     if (colonne<7 && colonne>0){
-                        int tempoLigne = getPP(ligne);
-                        int tempoColonne = getMM(colonne);
-                        Case c = boardCase[getPP(ligne)][getMM(colonne)];
+                        int tempoLigne = getLigneBoard(ligne+1);
+                        int tempoColonne = colonne-1;
+
+                        //
+                        Case c = boardCase[getLigneBoard(ligne+1)][colonne-1];
+
+                        System.out.println("information Mouvement");
+                        System.out.println(id);
+                        System.out.print("patate");
+                        System.out.println(tempoLigne);
+                        System.out.println(tempoColonne);
+                        System.out.println("Gauche:"+c.id);
+                        System.out.print("fin");
+
+
                         if(boardCase[getPP(ligne)][getMM(colonne)].occupant!=null){
                                 if (boardCase[getPP(ligne)][getMM(colonne)].occupant.couleur!=coulJ && boardCase[getMM(ligne)][getPP(colonne)].occupant instanceof Pousseur) {
                                     Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
@@ -343,6 +379,13 @@ public class Mouvement {
 
         return arrayMouvements;
     }
+
+    private int getLigneBoard(int ligne)
+    {
+        return 8-ligne;
+    }
+
+
     private int getPP(int ligne) {
         int tempo = ligne;
         return tempo ++;

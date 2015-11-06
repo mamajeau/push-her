@@ -26,15 +26,20 @@ public class IA {
         System.out.println("arriver"+arriver);
         */
 
+
+
         Case depart=(Case)plateau.listeCase.get((this.conv.ChiffreALettre(randomInt))+Integer.toString(ligne));
 
         //Le -1 permet de faire un random entre -1,0,1. Donc gauche,avant,droite
         Case arriver=(Case)plateau.listeCase.get(this.conv.ChiffreALettre(randomInt+(randomGenerator.nextInt(3)-1))+Integer.toString(ligne+1));
 
-       // Mouvement mouvement=new Mouvement(this.plateau);
-       // String deplacement=mouvement.deplacer(depart,arriver);
+        Mouvement mouvement=new Mouvement(this.plateau);
 
-       // return deplacement;
-        return null;
+        mouvement.coupValide(depart);
+
+        String deplacement=mouvement.deplacer(depart,arriver);
+
+        return deplacement;
+        //return null;
     }
 }

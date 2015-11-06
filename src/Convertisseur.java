@@ -20,14 +20,14 @@ public class Convertisseur {
         this.converNombre.put(5,'F');
         this.converNombre.put(6, 'G');
         this.converNombre.put(7, 'H');
-        this.converLettre.put('A', 0);
-        this.converLettre.put('B', 1);
+        this.converLettre.put('A',0);
+        this.converLettre.put('B',1);
         this.converLettre.put('C',2);
-        this.converLettre.put('D', 3);
+        this.converLettre.put('D',3);
         this.converLettre.put('E',4);
-        this.converLettre.put('F', 5);
+        this.converLettre.put('F',5);
         this.converLettre.put('G',6);
-        this.converLettre.put('H', 7);
+        this.converLettre.put('H',7);
     }
 
     public static Convertisseur getInstance() {

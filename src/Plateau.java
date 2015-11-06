@@ -28,7 +28,7 @@ public class Plateau {
             String ligne="";
             for (int j = 0; j < 8; j++) {
                 //ligne=ligne+Integer.toString(board[j][i]);
-                Case caseSimple=board[j][i];
+                Case caseSimple=board[i][j];
                 if (caseSimple.occupant != null)
                 {
                     if (caseSimple.occupant instanceof Pousse)

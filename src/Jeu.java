@@ -79,7 +79,7 @@ public class Jeu {
 
     private String getId(int ligne, int colonne) {
         String id = "";
-        switch (ligne){
+        switch (colonne){
             case 0: id += "A";
                 break;
             case 1: id += "B";
@@ -97,7 +97,7 @@ public class Jeu {
             case 7: id += "H";
                 break;
         }
-        switch (colonne){
+        switch (ligne){
             case 0: id += "8";
                 break;
             case 1: id += "7";

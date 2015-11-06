@@ -28,7 +28,6 @@ public class Convertisseur {
         this.converLettre.put('F', 5);
         this.converLettre.put('G',6);
         this.converLettre.put('H', 7);
-
     }
 
     public static Convertisseur getInstance() {

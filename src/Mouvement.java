@@ -84,146 +84,57 @@ public class Mouvement {
     * 456
     * 789
     * */
-    public ArrayList<Mouvement> coupValide(Case depart)
+    public ArrayList<Mouvement> coupsValides(Case depart)
     {
         Pion pion = depart.occupant;
         boolean coulJ = depart.occupant.couleur;
         String id = depart.id;
-        char letter = id.charAt(0);
-        int colonne = convertisseur.LettreAChiffre(letter);
-        String stringLigne =  ""+id.charAt(1);
-        int ligne = Integer.parseInt(stringLigne);
+        int colonne = convertisseur.LettreAChiffre(id.charAt(0));
+        int ligne = getLigneBoard(Integer.parseInt(new String(""+id.charAt(1))));
         ArrayList<Mouvement> arrayMouvements = new ArrayList<Mouvement>();
 
 
         if(pion instanceof Pousseur)
         {
-            //Si le pousseur est blanc
-            if (coulJ == true){
-                if (ligne<7){
-
-                    if (colonne<7 && colonne>0){
-                        if(boardCase[getPP(ligne)][getMM(colonne)].occupant!=null){
-                            if (boardCase[getPP(ligne)][getMM(colonne)].occupant.couleur!=coulJ) {
-                                Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else {
-                            Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
-                            arrayMouvements.add(m);
-                        }
-                        if( boardCase[getPP(ligne)][colonne].occupant == null){
-                            Mouvement m = new Mouvement(depart,boardCase[getPP(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getPP(ligne)][getPP(colonne)].occupant!=null){
-                            if (boardCase[getPP(ligne)][getPP(colonne)].occupant.couleur!=coulJ) {
-                                Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getPP(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else {
-                            Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getPP(colonne)]);
-                            arrayMouvements.add(m);
-                        }
+            if (coulJ == true) {
+                //Deplacement tout droit pour pousseur blanc
+                if (boardCase[ligne - 1][colonne].occupant == null) {
+                    Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne]);
+                    arrayMouvements.add(m);
+                }
+                //Deplacement a droite pour pousseur blanc
+                if (colonne != 7) {
+                    if (boardCase[ligne - 1][colonne + 1].occupant == null) {
+                        Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne + 1]);
+                        arrayMouvements.add(m);
                     }
-                    else if (colonne == 7){
-                        if(boardCase[getPP(ligne)][colonne].occupant == null){
-                            Mouvement m = new Mouvement(depart,boardCase[getPP(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getPP(ligne)][getMM(colonne)].occupant!=null) {
-                            if (boardCase[getPP(ligne)][getMM(colonne)].occupant.couleur != coulJ) {
-                                Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else {
-                            Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
-                            arrayMouvements.add(m);
-                        }
-                    }
-                    else if (colonne == 0){
-                        if(boardCase[getPP(ligne)][colonne].occupant == null){
-                            Mouvement m = new Mouvement(depart,boardCase[getPP(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getPP(ligne)][getPP(colonne)].occupant!=null) {
-                            if (boardCase[getPP(ligne)][getPP(colonne)].occupant.couleur!=coulJ){
-                                Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getPP(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else {
-                            Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getPP(colonne)]);
-                            arrayMouvements.add(m);
-                        }
+                }
+                //Deplacement a gauche pour pousseur blanc
+                if (colonne != 0) {
+                    if (boardCase[ligne - 1][colonne - 1].occupant == null) {
+                        Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne - 1]);
+                        arrayMouvements.add(m);
                     }
                 }
             }
-            //Le pousseur est noir
-            else {
-                if (ligne<0){
-
-                    if (colonne<7 && colonne>0){
-                        if(boardCase[getMM(ligne)][getMM(colonne)].occupant!=null) {
-                            if (boardCase[getMM(ligne)][getMM(colonne)].occupant.couleur!=coulJ)
-                            {
-                                Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getMM(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else {
-                            Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getMM(colonne)]);
-                            arrayMouvements.add(m);
-                        }
-                        if( boardCase[getMM(ligne)][colonne].occupant == null){
-                            Mouvement m = new Mouvement(depart,boardCase[getMM(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getMM(ligne)][getPP(colonne)].occupant!=null) {
-                             if(boardCase[getMM(ligne)][getPP(colonne)].occupant.couleur!=coulJ) {
-                                 Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getPP(colonne)]);
-                                 arrayMouvements.add(m);
-                             }
-                        }
-                        else {
-                            Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getPP(colonne)]);
-                            arrayMouvements.add(m);
-                        }
+            //Deplacement tout droit pour pousseur noir
+            else if (coulJ == false) {
+                if (boardCase[ligne + 1][colonne].occupant == null) {
+                    Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne]);
+                    arrayMouvements.add(m);
+                }
+                //Deplacement a droite pour pousseur blanc
+                if (colonne != 7) {
+                    if (boardCase[ligne + 1][colonne + 1].occupant == null) {
+                        Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne + 1]);
+                        arrayMouvements.add(m);
                     }
-                    else if (colonne == 7){
-                        if(boardCase[getMM(ligne)][colonne].occupant == null){
-                            Mouvement m = new Mouvement(depart,boardCase[getMM(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getMM(ligne)][getMM(colonne)].occupant!=null){
-                            if (boardCase[getMM(ligne)][getMM(colonne)].occupant.couleur!=coulJ) {
-                                Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getMM(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else {
-                            Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getMM(colonne)]);
-                            arrayMouvements.add(m);
-                        }
-                    }
-                    else if (colonne == 0){
-                        if(boardCase[getMM(ligne)][colonne].occupant == null){
-                            Mouvement m = new Mouvement(depart,boardCase[getMM(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getMM(ligne)][getPP(colonne)].occupant!=null){
-                            if (boardCase[getMM(ligne)][getPP(colonne)].occupant.couleur!=coulJ) {
-                                Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getPP(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else {
-                            Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getPP(colonne)]);
-                            arrayMouvements.add(m);
-                        }
+                }
+                //Deplacement a gauche pour pousseur blanc
+                if (colonne != 0) {
+                    if (boardCase[ligne + 1][colonne - 1].occupant == null) {
+                        Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne - 1]);
+                        arrayMouvements.add(m);
                     }
                 }
             }
@@ -231,150 +142,81 @@ public class Mouvement {
 
         else if(pion instanceof Pousse)
         {
-            //Si le pousseur est blanc
-            if (coulJ == true){
-                if (ligne<7){
-                    if (colonne<7 && colonne>0){
-                        int tempoLigne = getLigneBoard(ligne+1);
-                        int tempoColonne = colonne-1;
-
-                        //
-                        Case c = boardCase[getLigneBoard(ligne+1)][colonne-1];
-
-                        System.out.println("information Mouvement");
-                        System.out.println(id);
-                        System.out.print("patate");
-                        System.out.println(tempoLigne);
-                        System.out.println(tempoColonne);
-                        System.out.println("Gauche:"+c.id);
-                        System.out.print("fin");
-
-
-                        if(boardCase[getPP(ligne)][getMM(colonne)].occupant!=null){
-                                if (boardCase[getPP(ligne)][getMM(colonne)].occupant.couleur!=coulJ && boardCase[getMM(ligne)][getPP(colonne)].occupant instanceof Pousseur) {
-                                    Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
-                                    arrayMouvements.add(m);
-                                }
-                        }
-                        else if(boardCase[getMM(ligne)][getPP(colonne)].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
-                            arrayMouvements.add(m);
-                        }
-                        if( boardCase[getPP(ligne)][colonne].occupant == null && boardCase[getMM(ligne)][colonne].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart,boardCase[getPP(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getPP(ligne)][getPP(colonne)].occupant!=null) {
-                            if (boardCase[getPP(ligne)][getPP(colonne)].occupant.couleur!=coulJ && boardCase[getMM(ligne)][getMM(colonne)].occupant instanceof Pousseur)
-                            {
-                                Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getPP(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else if (boardCase[getMM(ligne)][getMM(colonne)].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getPP(colonne)]);
+            //Si le pousse est blanc
+            if (coulJ == true) {
+                //Deplacement tout droit pour pousse blanc
+                try {
+                    if (boardCase[ligne - 1][colonne].occupant == null && boardCase[ligne + 1][colonne].occupant instanceof Pousseur) {
+                        Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne]);
+                        arrayMouvements.add(m);
+                    }
+                }
+                catch (NullPointerException e){
+                    System.out.println("Il n'y a pas de pousseur a la case "+ boardCase[ligne + 1][colonne].id);
+                }
+                //Deplacement a droite pour pousse blanc
+                if (colonne < 7 && colonne != 0){
+                    try {
+                        if (boardCase[ligne - 1][colonne + 1].occupant == null && boardCase[ligne + 1][colonne - 1].occupant instanceof Pousseur) {
+                            Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne + 1]);
                             arrayMouvements.add(m);
                         }
                     }
-                    else if (colonne == 7){
-                        if(boardCase[getPP(ligne)][colonne].occupant == null && boardCase[getMM(ligne)][colonne].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart,boardCase[getPP(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getPP(ligne)][getMM(colonne)].occupant!=null){
-                            if (boardCase[getPP(ligne)][getMM(colonne)].occupant.couleur!=coulJ && boardCase[getMM(ligne)][getPP(colonne)].occupant instanceof Pousseur)
-                            {
-                                Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else if (boardCase[getMM(ligne)][getPP(colonne)].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getMM(colonne)]);
+                    catch (NullPointerException e){
+                        System.out.println("Il n'y a pas pousseur a la case "+ boardCase[ligne + 1][colonne - 1].id);
+                    }
+                }
+                //Deplacement a gauche pour pousse blanc
+                if (colonne > 0 && colonne !=7){
+                    try {
+                        if (boardCase[ligne - 1][colonne - 1].occupant == null && boardCase[ligne + 1][colonne + 1].occupant instanceof Pousseur) {
+                            Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne - 1]);
                             arrayMouvements.add(m);
                         }
                     }
-                    else if (colonne == 0){
-                        if(boardCase[getPP(ligne)][colonne].occupant == null){
-                            Mouvement m = new Mouvement(depart,boardCase[getPP(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getPP(ligne)][getPP(colonne)].occupant!=null){
-                            if (boardCase[getPP(ligne)][getPP(colonne)].occupant.couleur!=coulJ && boardCase[getMM(ligne)][getMM(colonne)].occupant instanceof Pousseur) {
-                                Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getPP(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else if (boardCase[getMM(ligne)][getMM(colonne)].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart, boardCase[getPP(ligne)][getPP(colonne)]);
-                            arrayMouvements.add(m);
-                        }
+                    catch (NullPointerException e){
+                        System.out.println("Il n'y a pas pousseur a la case "+ boardCase[ligne + 1][colonne + 1].id);
                     }
                 }
             }
-            //Le pousseur est noir
-            else {
-                if (ligne<0){
 
-                    if (colonne<7 && colonne>0){
-                        if(boardCase[getMM(ligne)][getMM(colonne)].occupant!=null){
-                                if (boardCase[getMM(ligne)][getMM(colonne)].occupant.couleur!=coulJ && boardCase[getPP(ligne)][getPP(colonne)].occupant instanceof Pousseur) {
-                                    Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getMM(colonne)]);
-                                    arrayMouvements.add(m);
-                                }
-                        }
-                        else if (boardCase[getPP(ligne)][getPP(colonne)].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getMM(colonne)]);
-                            arrayMouvements.add(m);
-                        }
-                        if( boardCase[getMM(ligne)][colonne].occupant == null && boardCase[getPP(ligne)][colonne].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart,boardCase[getMM(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getMM(ligne)][getPP(colonne)].occupant!=null) {
-                            if (boardCase[getMM(ligne)][getPP(colonne)].occupant.couleur!=coulJ && boardCase[getPP(ligne)][getMM(colonne)].occupant instanceof Pousseur) {
-                                Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getPP(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else if (boardCase[getMM(ligne)][getPP(colonne)].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getPP(colonne)]);
+            else if (coulJ == false) {
+                //Deplacement tout droit pour pousse noir
+                try {
+                    if (boardCase[ligne + 1][colonne].occupant == null && boardCase[ligne - 1][colonne].occupant instanceof Pousseur) {
+                        Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne]);
+                        arrayMouvements.add(m);
+                    }
+                }
+                catch (NullPointerException e){
+                    System.out.println("Il n'y a pas pousseur a la case "+ boardCase[ligne - 1][colonne].id);
+                }
+                //Deplacement a droite pour pousse noir
+                if (colonne < 7 && colonne !=0){
+                    try {
+                        if (boardCase[ligne + 1][colonne + 1].occupant == null && boardCase[ligne - 1][colonne - 1].occupant instanceof Pousseur) {
+                            Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne + 1]);
                             arrayMouvements.add(m);
                         }
                     }
-                    else if (colonne == 7){
-                        if(boardCase[getMM(ligne)][colonne].occupant == null && boardCase[getPP(ligne)][colonne].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart,boardCase[getMM(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getMM(ligne)][getMM(colonne)].occupant!=null){
-                            if (boardCase[getMM(ligne)][getMM(colonne)].occupant.couleur!=coulJ && boardCase[getPP(ligne)][getPP(colonne)].occupant instanceof Pousseur) {
-                                Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getMM(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else if (boardCase[getPP(ligne)][getMM(colonne)].occupant == null && boardCase[getPP(ligne)][getPP(colonne)].occupant instanceof Pousseur) {
-                            Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getMM(colonne)]);
+                    catch (NullPointerException e){
+                        System.out.println("Il n'y a pas d'occupant a la case "+ boardCase[ligne - 1][colonne - 1].id);
+                    }
+                }
+                //Deplacement a gauche pour pousse noir
+                if (colonne > 0 && colonne != 7){
+                    try {
+                        if (boardCase[ligne + 1][colonne - 1].occupant == null && boardCase[ligne - 1][colonne + 1].occupant instanceof Pousseur) {
+                            Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne - 1]);
                             arrayMouvements.add(m);
                         }
                     }
-                    else if (colonne == 0){
-                        if(boardCase[getMM(ligne)][colonne].occupant == null && boardCase[getPP(ligne)][colonne].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart,boardCase[getMM(ligne)][colonne]);
-                            arrayMouvements.add(m);
-                        }
-                        if(boardCase[getMM(ligne)][getPP(colonne)].occupant!=null){
-                            if (boardCase[getMM(ligne)][getPP(colonne)].occupant.couleur!=coulJ && boardCase[getPP(ligne)][getMM(colonne)].occupant instanceof Pousseur) {
-                                Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getPP(colonne)]);
-                                arrayMouvements.add(m);
-                            }
-                        }
-                        else if (boardCase[getMM(ligne)][getPP(colonne)].occupant == null && boardCase[getPP(ligne)][getMM(colonne)].occupant instanceof Pousseur){
-                            Mouvement m = new Mouvement(depart, boardCase[getMM(ligne)][getPP(colonne)]);
-                            arrayMouvements.add(m);
-                        }
+                    catch (NullPointerException e){
+                        System.out.println("Il n'y a pas pousseur a la case "+ boardCase[ligne - 1][colonne + 1].id);
                     }
                 }
             }
+
         }
 
         return arrayMouvements;
@@ -386,12 +228,4 @@ public class Mouvement {
     }
 
 
-    private int getPP(int ligne) {
-        int tempo = ligne;
-        return tempo ++;
-    }
-    private int getMM(int ligne) {
-        int tempo = ligne;
-        return tempo --;
-    }
 }

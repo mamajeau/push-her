@@ -65,17 +65,34 @@ public class Jeu {
             }
         }
         this.plateau = new Plateau(listeCase,casesOccupeesBlanches ,casesOccupeesNoires, boardCase);
+        genererMouvements(plateau);
+    }
+
+    //Fonction qu'on a a appeler pour generer les mouvements en fonction d'un plateau (Tu vois mamajeau jmets des commentaires)
+    private void genererMouvements(Plateau plateau){
         Mouvement m = new Mouvement(plateau);
-        Enumeration items = casesOccupeesBlanches.keys();
-        //Code de cath pour tout checker
-        /*ArrayList<Mouvement> mouvementsPossibles = new ArrayList<Mouvement>();
-        while (items.hasMoreElements()){
-            Case c =(Case) casesOccupeesBlanches.get(items.nextElement());
-            ArrayList<Mouvement> tempo = m.coupValide(c);
+        Enumeration itemsBlancs = casesOccupeesBlanches.keys();
+        //Génération des mouvements des pions blancs, en fonctions des cases occupées blanches
+        ArrayList<Mouvement> mouvementsPossiblesBlancs = new ArrayList<Mouvement>();
+        while (itemsBlancs.hasMoreElements()){
+            Case c =(Case) casesOccupeesBlanches.get(itemsBlancs.nextElement());
+            ArrayList<Mouvement> tempo = m.coupsValides(c);
             for (int i=0; i<tempo.size();i++) {
-                mouvementsPossibles.add(tempo.get(i));
+                mouvementsPossiblesBlancs.add(tempo.get(i));
             }
-        }*/
+        }
+        Enumeration itemsNoirs = casesOccupeesNoires.keys();
+        //Génération des mouvements des pions noirs, en fonctions des cases occupées noires
+        ArrayList<Mouvement> mouvementsPossiblesNoirs = new ArrayList<Mouvement>();
+        while (itemsNoirs.hasMoreElements()){
+            Case c =(Case) casesOccupeesNoires.get(itemsNoirs.nextElement());
+            ArrayList<Mouvement> tempo = m.coupsValides(c);
+            for (int i=0; i<tempo.size();i++) {
+                mouvementsPossiblesNoirs.add(tempo.get(i));
+            }
+        }
+        String s = "hello";
+        //Ici on a mouvementsPossiblesBlancs et mouvementsPossiblesNoirs qui contiennent les mouvements, on pourrait pogner les randoms et les pitcher au minmax
     }
 
     private String getId(int ligne, int colonne) {

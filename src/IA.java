@@ -35,7 +35,7 @@ public class IA {
 
         Mouvement mouvement=new Mouvement(this.plateau);
 
-        mouvement.coupValide(depart);
+        mouvement.coupsValides(depart);
 
         String deplacement=mouvement.deplacer(depart,arriver);
 

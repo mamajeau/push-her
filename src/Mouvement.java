@@ -122,10 +122,20 @@ public class Mouvement {
                         Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne + 1]);
                         arrayMouvements.add(m);
                     }
+                    //Si la case d'arrivee est occupee par un mechant
+                    else if (boardCase[ligne - 1][colonne + 1].occupant != null && boardCase[ligne - 1][colonne + 1].occupant.couleur != coulJ){
+                        Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne + 1]);
+                        arrayMouvements.add(m);
+                    }
                 }
                 //Deplacement a gauche pour pousseur blanc
                 if (colonne != 0) {
                     if (boardCase[ligne - 1][colonne - 1].occupant == null) {
+                        Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne - 1]);
+                        arrayMouvements.add(m);
+                    }
+                    //Si la case d'arrivee est occupee par un mechant
+                    else if (boardCase[ligne - 1][colonne - 1].occupant != null && boardCase[ligne - 1][colonne - 1].occupant.couleur != coulJ){
                         Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne - 1]);
                         arrayMouvements.add(m);
                     }
@@ -137,16 +147,26 @@ public class Mouvement {
                     Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne]);
                     arrayMouvements.add(m);
                 }
-                //Deplacement a droite pour pousseur blanc
+                //Deplacement a droite pour pousseur noir
                 if (colonne != 7) {
                     if (boardCase[ligne + 1][colonne + 1].occupant == null) {
                         Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne + 1]);
                         arrayMouvements.add(m);
                     }
+                    //Si la case d'arrivee est occupee par un mechant
+                    else if (boardCase[ligne + 1][colonne + 1].occupant != null && boardCase[ligne + 1][colonne + 1].occupant.couleur != coulJ){
+                        Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne + 1]);
+                        arrayMouvements.add(m);
+                    }
                 }
-                //Deplacement a gauche pour pousseur blanc
+                //Deplacement a gauche pour pousseur noir
                 if (colonne != 0) {
                     if (boardCase[ligne + 1][colonne - 1].occupant == null) {
+                        Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne - 1]);
+                        arrayMouvements.add(m);
+                    }
+                    //Si la case d'arrivee est occupee par un mechant
+                    else if (boardCase[ligne + 1][colonne - 1].occupant != null && boardCase[ligne + 1][colonne - 1].occupant.couleur != coulJ){
                         Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne - 1]);
                         arrayMouvements.add(m);
                     }
@@ -175,6 +195,11 @@ public class Mouvement {
                             Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne + 1]);
                             arrayMouvements.add(m);
                         }
+                        //Si la case d'arrivee est occupee par un mechant
+                        else if (boardCase[ligne - 1][colonne + 1].occupant !=null && boardCase[ligne - 1][colonne + 1].occupant.couleur!= coulJ  && boardCase[ligne + 1][colonne - 1].occupant instanceof Pousseur) {
+                            Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne + 1]);
+                            arrayMouvements.add(m);
+                        }
                     }
                     catch (NullPointerException e){
                         System.out.println("Il n'y a pas pousseur a la case "+ boardCase[ligne + 1][colonne - 1].id);
@@ -184,6 +209,11 @@ public class Mouvement {
                 if (colonne > 0 && colonne !=7){
                     try {
                         if (boardCase[ligne - 1][colonne - 1].occupant == null && boardCase[ligne + 1][colonne + 1].occupant instanceof Pousseur) {
+                            Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne - 1]);
+                            arrayMouvements.add(m);
+                        }
+                        //Si la case d'arrivee est occupee par un mechant
+                        else if (boardCase[ligne - 1][colonne - 1].occupant != null && boardCase[ligne - 1][colonne - 1].occupant.couleur != coulJ && boardCase[ligne + 1][colonne + 1].occupant instanceof Pousseur) {
                             Mouvement m = new Mouvement(depart, boardCase[ligne - 1][colonne - 1]);
                             arrayMouvements.add(m);
                         }
@@ -212,6 +242,11 @@ public class Mouvement {
                             Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne + 1]);
                             arrayMouvements.add(m);
                         }
+                        //Si la case d'arrivee est occupee par un mechant
+                        else if (boardCase[ligne + 1][colonne + 1].occupant != null && boardCase[ligne + 1][colonne + 1].occupant.couleur != coulJ && boardCase[ligne - 1][colonne - 1].occupant instanceof Pousseur) {
+                            Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne + 1]);
+                            arrayMouvements.add(m);
+                        }
                     }
                     catch (NullPointerException e){
                         System.out.println("Il n'y a pas d'occupant a la case "+ boardCase[ligne - 1][colonne - 1].id);
@@ -221,6 +256,11 @@ public class Mouvement {
                 if (colonne > 0 && colonne != 7){
                     try {
                         if (boardCase[ligne + 1][colonne - 1].occupant == null && boardCase[ligne - 1][colonne + 1].occupant instanceof Pousseur) {
+                            Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne - 1]);
+                            arrayMouvements.add(m);
+                        }
+                        //Si la case d'arrivee est occupee par un mechant
+                        else if (boardCase[ligne + 1][colonne - 1].occupant != null && boardCase[ligne + 1][colonne - 1].occupant.couleur != coulJ && boardCase[ligne - 1][colonne + 1].occupant instanceof Pousseur) {
                             Mouvement m = new Mouvement(depart, boardCase[ligne + 1][colonne - 1]);
                             arrayMouvements.add(m);
                         }

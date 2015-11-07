@@ -47,6 +47,7 @@ class Client {
                     //Initialisation du jeu
                     jeu.construirePlateau(board);
                     jeu.construireIA();
+                    jeu.ia.couleur=true;
                     //=========================
 
                     String coup=jeu.ia.jouerCoup();
@@ -84,6 +85,7 @@ class Client {
                         //Initialisation du jeu
                         jeu.construirePlateau(board);
                         jeu.construireIA();
+                        jeu.ia.couleur=false;
                         //=========================
                 }
 

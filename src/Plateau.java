@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -21,6 +22,34 @@ public class Plateau {
         //afficherBoard();
         afficherCase();
     }
+
+    //Fonction qu'on a a appeler pour generer les mouvements en fonction d'un plateau (Tu vois mamajeau jmets des commentaires)
+    public void genererMouvements(){
+        Mouvement m = new Mouvement(this);
+        Enumeration itemsBlancs = casesOccupeesBlanches.keys();
+        //G�n�ration des mouvements des pions blancs, en fonctions des cases occup�es blanches
+        ArrayList<Mouvement> mouvementsPossiblesBlancs = new ArrayList<Mouvement>();
+        while (itemsBlancs.hasMoreElements()){
+            Case c =(Case) casesOccupeesBlanches.get(itemsBlancs.nextElement());
+            ArrayList<Mouvement> tempo = m.coupsValides(c);
+            for (int i=0; i<tempo.size();i++) {
+                mouvementsPossiblesBlancs.add(tempo.get(i));
+            }
+        }
+        Enumeration itemsNoirs = casesOccupeesNoires.keys();
+        //G�n�ration des mouvements des pions noirs, en fonctions des cases occup�es noires
+        ArrayList<Mouvement> mouvementsPossiblesNoirs = new ArrayList<Mouvement>();
+        while (itemsNoirs.hasMoreElements()){
+            Case c =(Case) casesOccupeesNoires.get(itemsNoirs.nextElement());
+            ArrayList<Mouvement> tempo = m.coupsValides(c);
+            for (int i=0; i<tempo.size();i++) {
+                mouvementsPossiblesNoirs.add(tempo.get(i));
+            }
+        }
+        String s = "hello";
+        //Ici on a mouvementsPossiblesBlancs et mouvementsPossiblesNoirs qui contiennent les mouvements, on pourrait pogner les randoms et les pitcher au minmax
+    }
+
 
     //petite fonction pour passer  travers le board pour afficher les cases
     public void afficherBoard()

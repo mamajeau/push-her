@@ -7,11 +7,20 @@ import java.util.Random;
 public class IA {
     Plateau plateau;
     Convertisseur conv = Convertisseur.getInstance();
+    boolean couleur;
 
     public IA(Plateau plateau)
     {
         this.plateau=plateau;
     }
+
+    public void choixCoup()
+    {
+        //genererMouvement
+        //faire random
+        //mettre ds arbre avec un tableau tempo
+    }
+
 
     public String jouerCoup()
     {

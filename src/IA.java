@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Random;
 
@@ -18,7 +20,10 @@ public class IA {
     {
         //genererMouvement
         //faire random
-        //mettre ds arbre avec un tableau tempo
+        //mettre ds arbre avec un tableau temp
+        ArrayList<Mouvement> mouvementPossible=plateau.genererMouvements(this.couleur);
+        System.out.println("mouvement possible");
+        System.out.println(mouvementPossible);
     }
 
 

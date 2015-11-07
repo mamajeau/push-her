@@ -24,29 +24,37 @@ public class Plateau {
     }
 
     //Fonction qu'on a a appeler pour generer les mouvements en fonction d'un plateau (Tu vois mamajeau jmets des commentaires)
-    public void genererMouvements(){
+    public ArrayList<Mouvement> genererMouvements(boolean couleur){
         Mouvement m = new Mouvement(this);
-        Enumeration itemsBlancs = casesOccupeesBlanches.keys();
-        //G�n�ration des mouvements des pions blancs, en fonctions des cases occup�es blanches
-        ArrayList<Mouvement> mouvementsPossiblesBlancs = new ArrayList<Mouvement>();
-        while (itemsBlancs.hasMoreElements()){
-            Case c =(Case) casesOccupeesBlanches.get(itemsBlancs.nextElement());
-            ArrayList<Mouvement> tempo = m.coupsValides(c);
-            for (int i=0; i<tempo.size();i++) {
-                mouvementsPossiblesBlancs.add(tempo.get(i));
+        ArrayList<Mouvement>mouvementsPossible=null;
+        if(couleur) {
+            Enumeration itemsBlancs = casesOccupeesBlanches.keys();
+            //G�n�ration des mouvements des pions blancs, en fonctions des cases occup�es blanches
+            ArrayList<Mouvement> mouvementsPossiblesBlancs = new ArrayList<Mouvement>();
+            while (itemsBlancs.hasMoreElements()) {
+                Case c = (Case) casesOccupeesBlanches.get(itemsBlancs.nextElement());
+                ArrayList<Mouvement> tempo = m.coupsValides(c);
+                for (int i = 0; i < tempo.size(); i++) {
+                    mouvementsPossiblesBlancs.add(tempo.get(i));
+                }
             }
+            mouvementsPossible=mouvementsPossiblesBlancs;
         }
-        Enumeration itemsNoirs = casesOccupeesNoires.keys();
-        //G�n�ration des mouvements des pions noirs, en fonctions des cases occup�es noires
-        ArrayList<Mouvement> mouvementsPossiblesNoirs = new ArrayList<Mouvement>();
-        while (itemsNoirs.hasMoreElements()){
-            Case c =(Case) casesOccupeesNoires.get(itemsNoirs.nextElement());
-            ArrayList<Mouvement> tempo = m.coupsValides(c);
-            for (int i=0; i<tempo.size();i++) {
-                mouvementsPossiblesNoirs.add(tempo.get(i));
+        else {
+            Enumeration itemsNoirs = casesOccupeesNoires.keys();
+            //G�n�ration des mouvements des pions noirs, en fonctions des cases occup�es noires
+            ArrayList<Mouvement> mouvementsPossiblesNoirs = new ArrayList<Mouvement>();
+            while (itemsNoirs.hasMoreElements()) {
+                Case c = (Case) casesOccupeesNoires.get(itemsNoirs.nextElement());
+                ArrayList<Mouvement> tempo = m.coupsValides(c);
+                for (int i = 0; i < tempo.size(); i++) {
+                    mouvementsPossiblesNoirs.add(tempo.get(i));
+                }
             }
+            mouvementsPossible=mouvementsPossiblesNoirs;
         }
         String s = "hello";
+        return mouvementsPossible;
         //Ici on a mouvementsPossiblesBlancs et mouvementsPossiblesNoirs qui contiennent les mouvements, on pourrait pogner les randoms et les pitcher au minmax
     }
 

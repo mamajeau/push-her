@@ -34,12 +34,26 @@ public class Mouvement {
 
         //Verifier si ca marche
 
+
+        //Enlever et ajouter des hashtable des possibilitees des couleurs
+        if(depart.occupant.couleur)
+        {
+            plateau.casesOccupeesBlanches.remove(depart.id);
+            plateau.casesOccupeesBlanches.put(arrivee.id,arrivee);
+        }
+        else
+        {
+            plateau.casesOccupeesNoires.remove(depart.id);
+            plateau.casesOccupeesNoires.put(arrivee.id,arrivee);
+        }
+
         //Deplacer dans les mapping
         arrivee.occupant=depart.occupant;
         depart.occupant=null;
 
         return depart.id+arrivee.id;
     }
+
 
     //Fonction pour la mise a jour des mouvements de l'adversaire dans notre board
     public void updateJoueur(String coordonner)

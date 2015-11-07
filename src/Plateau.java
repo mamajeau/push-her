@@ -5,7 +5,7 @@ import java.util.Hashtable;
 /**
  * Created by maaj on 2015-11-02.
  */
-public class Plateau {
+public class Plateau implements Cloneable{
 
     Hashtable listeCase;
     Hashtable casesOccupeesBlanches;
@@ -172,5 +172,70 @@ public class Plateau {
         }
 
         return null;
+    }
+
+/*
+    public void copiePlateau(Case [][] board)
+    {
+
+        listeCase = new Hashtable();
+        casesOccupeesBlanches = new Hashtable();
+        casesOccupeesNoires = new Hashtable();
+        for (int i=0; i<8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if ((board[i][j]).occupant.couleur && (board[i][j]).occupant instanceof Pousseur) {
+                    String id = this.getId(i, j);
+                    Pion p = new Pousseur(true);
+                    Case c = new Case(id, p);
+                    listeCase.put(id, c);
+                    casesOccupeesBlanches.put(id, c);
+                    boardCase[i][j] = c;
+                }
+                if (board[i][j] == 3) {
+                    String id = this.getId(i, j);
+                    Pion p = new Pousse(true);
+                    Case c = new Case(id, p);
+                    listeCase.put(id, c);
+                    casesOccupeesBlanches.put(id, c);
+                    boardCase[i][j] = c;
+                }
+                if (board[i][j] == 1) {
+                    String id = this.getId(i, j);
+                    Pion p = new Pousse(false);
+                    Case c = new Case(id, p);
+                    listeCase.put(id, c);
+                    casesOccupeesNoires.put(id, c);
+                    boardCase[i][j] = c;
+                }
+                if (board[i][j] == 2) {
+                    String id = this.getId(i, j);
+                    Pion p = new Pousseur(false);
+                    Case c = new Case(id, p);
+                    listeCase.put(id, c);
+                    casesOccupeesNoires.put(id, c);
+                    boardCase[i][j] = c;
+                }
+                if (board[i][j] == 0) {
+                    String id = this.getId(i, j);
+                    Case c = new Case(id, null);
+                    listeCase.put(id, c);
+                    boardCase[i][j] = c;
+                }
+            }
+        }
+    }
+*/
+    /*public Plateau getClone() throws CloneNotSupportedException {
+
+        return (Plateau)super.clone();
+    }*/
+    /*public Plateau getClone(Plateau plateau)
+    {
+        Plateau p = new Plateau(plateau.listeCase,plateau.casesOccupeesBlanches,plateau.casesOccupeesNoires,plateau.board);
+        //for all properties in FOo
+        return p;
+    }*/
+    public Plateau clone() throws CloneNotSupportedException {
+        return (Plateau)super.clone();
     }
 }

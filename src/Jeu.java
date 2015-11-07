@@ -65,7 +65,7 @@ public class Jeu {
             }
         }
         this.plateau = new Plateau(listeCase,casesOccupeesBlanches ,casesOccupeesNoires, boardCase);
-        plateau.genererMouvements();
+        //plateau.genererMouvements();
     }
 
 

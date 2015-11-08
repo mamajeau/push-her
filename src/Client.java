@@ -50,14 +50,14 @@ class Client {
                     jeu.ia.couleur=true;
                     //=========================
 
-                    String coup=jeu.ia.jouerCoup();
 
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
-                        String move = null;
-                        //move = console.readLine();
-                        move=coup;
-                        output.write(move.getBytes(),0,move.length());
-                        output.flush();
+                    String coup=jeu.ia.jouerCoup();
+                    String move = null;
+                    //move = console.readLine();
+                    move=coup;
+                    output.write(move.getBytes(),0,move.length());
+                    output.flush();
                     }
                     // Début de la partie en joueur Noir
                     if(cmd == '2'){

@@ -38,11 +38,21 @@ public class Mouvement {
         //Enlever et ajouter des hashtable des possibilitees des couleurs
         if(depart.occupant.couleur)
         {
+            if (arrivee.occupant != null){
+                if (arrivee.occupant.couleur == false){
+                    plateau.casesOccupeesNoires.remove(arrivee.id);
+                }
+            }
             plateau.casesOccupeesBlanches.remove(depart.id);
             plateau.casesOccupeesBlanches.put(arrivee.id,arrivee);
         }
         else
         {
+            if (arrivee.occupant != null){
+                if (arrivee.occupant.couleur == true){
+                    plateau.casesOccupeesBlanches.remove(arrivee.id);
+                }
+            }
             plateau.casesOccupeesNoires.remove(depart.id);
             plateau.casesOccupeesNoires.put(arrivee.id,arrivee);
         }
@@ -101,7 +111,13 @@ public class Mouvement {
     public ArrayList<Mouvement> coupsValides(Case depart)
     {
         Pion pion = depart.occupant;
-        boolean coulJ = depart.occupant.couleur;
+        boolean coulJ = false;
+        try {
+            coulJ = depart.occupant.couleur;
+        }
+        catch (Exception e){
+            System.out.println(depart.id);
+        }
         String id = depart.id;
         int colonne = convertisseur.LettreAChiffre(id.charAt(0));
         int ligne = getLigneBoard(Integer.parseInt(new String(""+id.charAt(1))));

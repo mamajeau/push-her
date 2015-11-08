@@ -39,6 +39,7 @@ public class Mouvement {
         if(depart.occupant.couleur)
         {
             if (arrivee.occupant != null){
+                //Si la case est occupee par un mechant, on enleve la case en question des cases occupees
                 if (arrivee.occupant.couleur == false){
                     plateau.casesOccupeesNoires.remove(arrivee.id);
                 }
@@ -49,6 +50,7 @@ public class Mouvement {
         else
         {
             if (arrivee.occupant != null){
+                //Si la case est occupee par un mechant, on enleve la case en question des cases occupees
                 if (arrivee.occupant.couleur == true){
                     plateau.casesOccupeesBlanches.remove(arrivee.id);
                 }

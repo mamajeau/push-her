@@ -61,10 +61,8 @@ class Client {
                     }
                     // Début de la partie en joueur Noir
                     if(cmd == '2'){
-                        joueur.couleur = false;
                         System.out.println("Nouvelle partie! Vous jouer noir, attendez le coup des blancs");
                         byte[] aBuffer = new byte[1024];
-
                         int size = input.available();
                         //System.out.println("size " + size);
                         input.read(aBuffer,0,size);
@@ -102,8 +100,7 @@ class Client {
                     String s = new String(aBuffer);
 
                     //Coup du joueur humain
-                    Mouvement mouvementJoueur=new Mouvement(jeu.plateau);
-                    mouvementJoueur.updateJoueur(s);
+                    jeu.plateau.updateJoueur(s);
                     jeu.plateau.afficherBoard();
 
                     System.out.println("Dernier coup : "+ s);

@@ -5,24 +5,34 @@ import java.util.ArrayList;
  */
 public class Noeud {
 
-    Plateau plateau;
+    int[][] board;
     ArrayList<Noeud> listeEnfant=new ArrayList<Noeud>();
     int poids;
     Mouvement mouvementFait;
 
-    public Noeud(Plateau plateau)
+    public Noeud(int[][] board)
     {
-        this.plateau=plateau;
+        this.board=board;
     }
 
-    public Noeud(Plateau plateau,Mouvement mouvementFait)
+    public Noeud(int[][] board,Mouvement mouvementFait)
     {
-        this.plateau=plateau;
+        this.board=board;
         this.mouvementFait=mouvementFait;
     }
 
     public void ajouterEnfant(Noeud enfant)
     {
         listeEnfant.add(enfant);
+    }
+
+    public int[][] getBoard(){
+        int [][] newBoard = new int[8][8];
+        for (int i=0; i<8; i++){
+            for (int j=0; j<8; j++){
+                newBoard[i][j]=this.board[i][j];
+            }
+        }
+        return newBoard;
     }
 }

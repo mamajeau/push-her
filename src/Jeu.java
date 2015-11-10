@@ -7,10 +7,6 @@ import java.util.Hashtable;
  */
 public class Jeu {
     public Plateau plateau;
-    private Hashtable listeCase;
-    private Hashtable casesOccupeesNoires;
-    private Hashtable casesOccupeesBlanches;
-    public Case[][]boardCase=new Case[8][8];
     public IA ia;
 
     public void construireIA()
@@ -19,53 +15,8 @@ public class Jeu {
     }
 
     public void construirePlateau(int[][] board) {
-        listeCase = new Hashtable();
-        casesOccupeesBlanches = new Hashtable();
-        casesOccupeesNoires = new Hashtable();
-        for (int i=0; i<8; i++){
-            for (int j=0; j<8 ;j++){
-                if (board[i][j] == 4){
-                    String id = this.getId(i,j);
-                    Pion p = new Pousseur (true);
-                    Case c = new Case(id, p);
-                    listeCase.put(id,c);
-                    casesOccupeesBlanches.put(id, c);
-                    boardCase[i][j]=c;
-                }
-                if (board[i][j] == 3){
-                    String id = this.getId(i,j);
-                    Pion p = new Pousse (true);
-                    Case c = new Case(id, p);
-                    listeCase.put(id,c);
-                    casesOccupeesBlanches.put(id, c);
-                    boardCase[i][j]=c;
-                }
-                if (board[i][j] == 1){
-                    String id = this.getId(i,j);
-                    Pion p = new Pousse (false);
-                    Case c = new Case(id, p);
-                    listeCase.put(id,c);
-                    casesOccupeesNoires.put(id, c);
-                    boardCase[i][j]=c;
-                }
-                if (board[i][j] == 2){
-                    String id = this.getId(i,j);
-                    Pion p = new Pousseur (false);
-                    Case c = new Case(id, p);
-                    listeCase.put(id,c);
-                    casesOccupeesNoires.put(id, c);
-                    boardCase[i][j]=c;
-                }
-                if (board[i][j] == 0){
-                    String id = this.getId(i,j);
-                    Case c = new Case(id, null);
-                    listeCase.put(id,c);
-                    boardCase[i][j]=c;
-                }
-            }
-        }
-        this.plateau = new Plateau(listeCase,casesOccupeesBlanches ,casesOccupeesNoires, boardCase);
-        //plateau.genererMouvements();
+
+        this.plateau = new Plateau(board);
     }
 
 

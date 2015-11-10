@@ -3,10 +3,13 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
- * Created by maaj on 2015-11-02.
+ * Created by maaj on POUSSEUR_NOIR015-11-0POUSSEUR_NOIR.
  */
 public class Plateau implements Cloneable{
-
+    public static int POUSSE_BLANC = 3;
+    public static int POUSSEUR_BLANC = 4;
+    public static int POUSSE_NOIR = 1;
+    public static int POUSSEUR_NOIR = 2;
     int[][] board;
     Convertisseur conv = Convertisseur.getInstance();
 
@@ -16,7 +19,7 @@ public class Plateau implements Cloneable{
         //afficherBoard();
         //afficherCase();
     }
-    //Un clone du board au complet
+    //Un clone du board au complet parce que le .clone() fail.
     public int[][] clonerBoard(){
         int [][] clone = new int [8][8];
         for (int i =0; i<8; i++){
@@ -33,8 +36,8 @@ public class Plateau implements Cloneable{
         for (int i=0; i<8; i++) {
             for (int j = 0; j < 8; j++) {
                 int pion = board[i][j];
-                    if (pion == 2 || pion == 4) {
-                        if (pion == 4 && i >0) {
+                    if (pion == POUSSEUR_NOIR || pion == POUSSEUR_BLANC) {
+                        if (pion == POUSSEUR_BLANC && i >0) {
                             //Deplacement tout droit pour pousseur blanc
                             if (board[i - 1][j] == 0) {
                                 Mouvement m = new Mouvement(i, j, i - 1, j);
@@ -47,7 +50,7 @@ public class Plateau implements Cloneable{
                                     arrayMouvementsBlancs.add(m);
                                 }
                                 //Si la case d'arrivee est occupee par un mechant
-                                else if (board[i - 1][j + 1] != 0 && (board[i - 1][j + 1] == 2 || board[i - 1][j + 1]== 1)) {
+                                else if (board[i - 1][j + 1] != 0 && (board[i - 1][j + 1] == POUSSEUR_NOIR || board[i - 1][j + 1]== POUSSE_NOIR)) {
                                     Mouvement m = new Mouvement(i, j, i - 1, j + 1);
                                     arrayMouvementsBlancs.add(m);
                                 }
@@ -59,14 +62,14 @@ public class Plateau implements Cloneable{
                                     arrayMouvementsBlancs.add(m);
                                 }
                                 //Si la case d'arrivee est occupee par un mechant
-                                else if (board[i - 1][j - 1] != 0 && (board[i - 1][j - 1] == 2 || board[i - 1][j - 1] == 1)) {
+                                else if (board[i - 1][j - 1] != 0 && (board[i - 1][j - 1] == POUSSEUR_NOIR || board[i - 1][j - 1] == POUSSE_NOIR)) {
                                     Mouvement m = new Mouvement(i, j, i - 1, j - 1);
                                     arrayMouvementsBlancs.add(m);
                                 }
                             }
                         }
                         //Deplacement tout droit pour pousseur noir
-                        else if (pion == 2 && i<7) {
+                        else if (pion == POUSSEUR_NOIR && i<7) {
                             if (board[i + 1][j] == 0) {
                                 Mouvement m = new Mouvement(i, j, i + 1, j);
                                 arrayMouvementsNoirs.add(m);
@@ -78,7 +81,7 @@ public class Plateau implements Cloneable{
                                     arrayMouvementsNoirs.add(m);
                                 }
                                 //Si la case d'arrivee est occupee par un mechant
-                                else if (board[i + 1][j + 1] != 0 && (board[i + 1][j + 1] == 3 || board[i + 1][j + 1] == 4)) {
+                                else if (board[i + 1][j + 1] != 0 && (board[i + 1][j + 1] == POUSSE_BLANC || board[i + 1][j + 1] == POUSSEUR_BLANC)) {
                                     Mouvement m = new Mouvement(i, j, i + 1, j + 1);
                                     arrayMouvementsNoirs.add(m);
                                 }
@@ -90,18 +93,18 @@ public class Plateau implements Cloneable{
                                     arrayMouvementsNoirs.add(m);
                                 }
                                 //Si la case d'arrivee est occupee par un mechant
-                                else if (board[i + 1][j - 1] != 0 && (board[i + 1][j - 1] == 3 || board[i + 1][j - 1] == 4)) {
+                                else if (board[i + 1][j - 1] != 0 && (board[i + 1][j - 1] == POUSSE_BLANC || board[i + 1][j - 1] == POUSSEUR_BLANC)) {
                                     Mouvement m = new Mouvement(i, j, i + 1, j - 1);
                                     arrayMouvementsNoirs.add(m);
                                 }
                             }
                         }
-                    } else if (pion == 1 || pion == 3) {
+                    } else if (pion == POUSSE_NOIR || pion == POUSSE_BLANC) {
                         //Si le pousse est blanc
-                        if (pion == 3 && i>0) {
+                        if (pion == POUSSE_BLANC && i>0) {
                             //Deplacement tout droit pour pousse blanc
                             try {
-                                if (board[i - 1][j] == 0 && board[i + 1][j] == 4) {
+                                if (board[i - 1][j] == 0 && board[i + 1][j] == POUSSEUR_BLANC) {
                                     Mouvement m = new Mouvement(i, j, i - 1, j);
                                     arrayMouvementsBlancs.add(m);
                                 }
@@ -111,12 +114,12 @@ public class Plateau implements Cloneable{
                             //Deplacement a droite pour pousse blanc
                             if (j < 7 && j != 0) {
                                 try {
-                                    if (board[i - 1][j + 1] == 0 && board[i + 1][j - 1] == 4) {
+                                    if (board[i - 1][j + 1] == 0 && board[i + 1][j - 1] == POUSSEUR_BLANC) {
                                         Mouvement m = new Mouvement(i, j, i - 1, j + 1);
                                         arrayMouvementsBlancs.add(m);
                                     }
                                     //Si la case d'arrivee est occupee par un mechant
-                                    else if (board[i - 1][j + 1] != 0 && (board[i - 1][j + 1] == 2 || board[i - 1][j + 1] == 1) && board[i + 1][j - 1] == 4) {
+                                    else if (board[i - 1][j + 1] != 0 && (board[i - 1][j + 1] == POUSSEUR_NOIR || board[i - 1][j + 1] == POUSSE_NOIR) && board[i + 1][j - 1] == POUSSEUR_BLANC) {
                                         Mouvement m = new Mouvement(i, j, i - 1, j + 1);
                                         arrayMouvementsBlancs.add(m);
                                     }
@@ -127,12 +130,12 @@ public class Plateau implements Cloneable{
                             //Deplacement a gauche pour pousse blanc
                             if (j > 0 && j != 7) {
                                 try {
-                                    if (board[i - 1][j - 1] == 0 && board[i + 1][j + 1] == 4) {
+                                    if (board[i - 1][j - 1] == 0 && board[i + 1][j + 1] == POUSSEUR_BLANC) {
                                         Mouvement m = new Mouvement(i, j, i - 1, j - 1);
                                         arrayMouvementsBlancs.add(m);
                                     }
                                     //Si la case d'arrivee est occupee par un mechant
-                                    else if (board[i - 1][j - 1] != 0 && (board[i - 1][j - 1] == 2 || board[i - 1][j - 1] == 1) && board[i + 1][j + 1] == 4) {
+                                    else if (board[i - 1][j - 1] != 0 && (board[i - 1][j - 1] == POUSSEUR_NOIR || board[i - 1][j - 1] == POUSSE_NOIR) && board[i + 1][j + 1] == POUSSEUR_BLANC) {
                                         Mouvement m = new Mouvement(i, j, i - 1, j - 1);
                                         arrayMouvementsBlancs.add(m);
                                     }
@@ -140,10 +143,10 @@ public class Plateau implements Cloneable{
                                     System.out.println("Il n'y a pas pousseur a la case ");
                                 }
                             }
-                        } else if (pion == 1 && i<7) {
+                        } else if (pion == POUSSE_NOIR && i<7) {
                             //Deplacement tout droit pour pousse noir
                             try {
-                                if (board[i + 1][j] == 0 && board[i - 1][j] == 2) {
+                                if (board[i + 1][j] == 0 && board[i - 1][j] == POUSSEUR_NOIR) {
                                     Mouvement m = new Mouvement(i, j, i + 1, j);
                                     arrayMouvementsNoirs.add(m);
                                 }
@@ -153,12 +156,12 @@ public class Plateau implements Cloneable{
                             //Deplacement a droite pour pousse noir
                             if (j < 7 && j != 0) {
                                 try {
-                                    if (board[i + 1][j + 1] == 0 && board[i - 1][j - 1] == 2) {
+                                    if (board[i + 1][j + 1] == 0 && board[i - 1][j - 1] == POUSSEUR_NOIR) {
                                         Mouvement m = new Mouvement(i, j, i + 1, j + 1);
                                         arrayMouvementsNoirs.add(m);
                                     }
                                     //Si la case d'arrivee est occupee par un mechant
-                                    else if (board[i + 1][j + 1] != 0 && (board[i + 1][j + 1] == 3 || board[i + 1][j + 1] == 4) && board[i - 1][j - 1] == 2) {
+                                    else if (board[i + 1][j + 1] != 0 && (board[i + 1][j + 1] == POUSSE_BLANC || board[i + 1][j + 1] == POUSSEUR_BLANC) && board[i - 1][j - 1] == POUSSEUR_NOIR) {
                                         Mouvement m = new Mouvement(i, j, i + 1, j + 1);
                                         arrayMouvementsNoirs.add(m);
                                     }
@@ -169,12 +172,12 @@ public class Plateau implements Cloneable{
                             //Deplacement a gauche pour pousse noir
                             if (j > 0 && j != 7) {
                                 try {
-                                    if (board[i + 1][j - 1] == 0 && board[i - 1][j + 1] == 2) {
+                                    if (board[i + 1][j - 1] == 0 && board[i - 1][j + 1] == POUSSEUR_NOIR) {
                                         Mouvement m = new Mouvement(i, j, i + 1, j - 1);
                                         arrayMouvementsNoirs.add(m);
                                     }
                                     //Si la case d'arrivee est occupee par un mechant
-                                    else if (board[i + 1][j - 1] != 0 && (board[i + 1][j - 1] == 3 || board[i + 1][j - 1] == 4) && board[i - 1][j + 1] == 2) {
+                                    else if (board[i + 1][j - 1] != 0 && (board[i + 1][j - 1] == POUSSE_BLANC || board[i + 1][j - 1] == POUSSEUR_BLANC) && board[i - 1][j + 1] == POUSSEUR_NOIR) {
                                         Mouvement m = new Mouvement(i, j, i + 1, j - 1);
                                         arrayMouvementsNoirs.add(m);
                                     }

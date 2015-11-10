@@ -4,7 +4,6 @@ import java.net.*;
 
 class Client {
     public static void main(String[] args) {
-
         Socket MyClient;
         BufferedInputStream input;
         BufferedOutputStream output;

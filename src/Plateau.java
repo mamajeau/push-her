@@ -224,13 +224,17 @@ public class Plateau implements Cloneable{
 
 		int colonneArrivee = convertisseur.LettreAChiffre(sousResultat[1].charAt(0));
 		int ligneArrivee = 8 - (Integer.parseInt((String)(""+sousResultat[1].charAt(1))));
-
+		
 		//Mise a jour des listes de pousseur
-		for(int i = 0; i>=7; i++){
-			if(pousseurBlanc.get(i).getX() == colonneDepart && pousseurBlanc.get(i).getY() == ligneDepart){
-				pousseurBlanc.add(i, new Pousseur(true, colonneArrivee, ligneArrivee));
-			}else if(pousseurNoir.get(i).getX() == colonneDepart && pousseurNoir.get(i).getY() == ligneDepart){
-				pousseurNoir.add(i, new Pousseur(false, colonneArrivee, ligneArrivee));
+		for(int i = 0; i<=7; i++){
+			if(pousseurBlanc.get(i).getY() == colonneDepart && pousseurBlanc.get(i).getX() == ligneDepart){
+				System.out.println("Mise a jour");
+				pousseurNoir.remove(i);
+				pousseurBlanc.add(i, new Pousseur(true, ligneArrivee, colonneArrivee));
+			}else if(pousseurNoir.get(i).getY() == colonneDepart && pousseurNoir.get(i).getX() == ligneDepart){
+				System.out.println("Mise a jour " + i);
+				pousseurNoir.remove(i);
+				pousseurNoir.add(i, new Pousseur(false, ligneArrivee, colonneArrivee));
 			}
 		}
 

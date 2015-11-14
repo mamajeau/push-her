@@ -71,7 +71,7 @@ public class IA {
 
         //On deplace dans notre plateau global
         String deplacement=plateau.deplacer(mouvementAFaire.ligneDepart,mouvementAFaire.colonneDepart,mouvementAFaire.ligneArrivee,mouvementAFaire.colonneArrivee);
-
+        
 
         return deplacement;
     }

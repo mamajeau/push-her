@@ -18,4 +18,11 @@ public class Pousseur extends Pion {
 	public int getY(){
 		return y;
 	}
+	
+	public String toString(){
+		if(couleur)
+			return "[Blanc, " + x + ", " + y + "]";
+		else
+			return "[Noir, " + x + ", " + y + "]";
+	}
 }

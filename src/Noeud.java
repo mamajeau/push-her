@@ -5,17 +5,17 @@ import java.util.ArrayList;
  */
 public class Noeud {
 
-    int[][] board;
+    int[] board;
     ArrayList<Noeud> listeEnfant=new ArrayList<Noeud>();
     int poids;
     Mouvement mouvementFait;
 
-    public Noeud(int[][] board)
+    public Noeud(int[] board)
     {
         this.board=board;
     }
 
-    public Noeud(int[][] board,Mouvement mouvementFait)
+    public Noeud(int[] board,Mouvement mouvementFait)
     {
         this.board=board;
         this.mouvementFait=mouvementFait;
@@ -26,12 +26,12 @@ public class Noeud {
         listeEnfant.add(enfant);
     }
 
-    public int[][] getBoard(){
-        int [][] newBoard = new int[8][8];
-        for (int i=0; i<8; i++){
-            for (int j=0; j<8; j++){
-                newBoard[i][j]=this.board[i][j];
-            }
+    public int[] getBoard(){
+        int [] newBoard = new int[64];
+        for (int i=0; i<64; i++){
+
+                newBoard[i]=this.board[i];
+
         }
         return newBoard;
     }

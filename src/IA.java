@@ -26,11 +26,13 @@ public class IA {
         int[] board = plateau.board;
         Random randomizer = new Random();
         //Minmax represente le noeud racine duquel decoulera le reste de l'arbre
-        minMax = new Noeud(board,null);
+        //minMax = new Noeud(board,null);
         //Appel recursif de la fonction qui va generer les noeuds du minmax
-        genererNoeuds(minMax,plateau,this.couleur);
+       // genererNoeuds(minMax,plateau,this.couleur);
 
-        Mouvement mouvementAFaire = minMax.listeEnfant.get(randomizer.nextInt(minMax.listeEnfant.size())).mouvementFait;
+        //Mouvement mouvementAFaire = minMax.listeEnfant.get(randomizer.nextInt(minMax.listeEnfant.size())).mouvementFait;
+
+        Mouvement mouvementAFaire = new Mouvement(6,1,5,1);
         return mouvementAFaire;
     }
 
@@ -47,7 +49,7 @@ public class IA {
     private void genererNoeuds(Noeud racine, Plateau p,boolean couleur){
         long stopTime = System.currentTimeMillis();
         //L'arbre va arreter de faire apres 4 secondes
-       if ((stopTime - startTime) > 3000){
+       if ((stopTime - startTime) > 1500){
             return;
         }
         ArrayList<Mouvement> mouvementsPossibles;

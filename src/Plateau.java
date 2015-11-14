@@ -15,7 +15,7 @@ public class Plateau implements Cloneable{
 
     public Plateau(int[] board){
         this.board = board;
-
+        this.board.toString();
         //afficherBoard();
         //afficherCase();
     }
@@ -52,7 +52,7 @@ public class Plateau implements Cloneable{
 
     public int getBoardValue(int colonne,int ligne)
     {
-        return board[(colonne*8)+ligne];
+        return board[(ligne*8)+colonne];
     }
 
     /**
@@ -259,8 +259,8 @@ public class Plateau implements Cloneable{
     {
         Convertisseur conv = Convertisseur.getInstance();
         //Deplacer dans les mapping
-        board[(colonneArrivee*8)+ligneArrivee]=getBoardValue(ligneDepart,colonneDepart);
-        board[(colonneDepart * 8) +ligneDepart] = 0;
+        board[(ligneArrivee*8)+colonneArrivee]=getBoardValue(ligneDepart,colonneDepart);
+        board[(ligneDepart * 8) +colonneDepart] = 0;
        // afficherBoard();
         String idDepart = conv.ChiffreALettre(colonneDepart) + "" + (8- ligneDepart);
         String idArrivee = conv.ChiffreALettre(colonneArrivee) + "" + (8 -ligneArrivee);

@@ -3,7 +3,19 @@
  */
 public class Pousseur extends Pion {
 
-    public Pousseur (boolean couleur){
-        super.couleur = couleur;
+	public Pousseur (boolean couleur, int x, int y){
+        super(couleur, x, y);
     }
+
+	public boolean getCouleur() {
+		return couleur;
+	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
+	}
 }

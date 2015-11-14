@@ -3,135 +3,155 @@ import java.net.*;
 
 
 class Client {
-    public static void main(String[] args) {
-        Socket MyClient;
-        BufferedInputStream input;
-        BufferedOutputStream output;
-        Joueur joueur = new Joueur();
-        int[][] board = new int[8][8];
-        Jeu jeu=null;
-        try {
-            MyClient = new Socket("localhost", 8888);
-            input    = new BufferedInputStream(MyClient.getInputStream());
-            output   = new BufferedOutputStream(MyClient.getOutputStream());
-            BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-            while(1 == 1){
-                char cmd = 0;
+	public static void main(String[] args) {
+		Socket MyClient;
+		BufferedInputStream input;
+		BufferedOutputStream output;
+		Joueur joueur = new Joueur();
+		int[][] board = new int[8][8];
+		Jeu jeu=null;
+		try {
+			MyClient = new Socket("localhost", 8888);
+			input    = new BufferedInputStream(MyClient.getInputStream());
+			output   = new BufferedOutputStream(MyClient.getOutputStream());
+			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+			while(1 == 1){
+				char cmd = 0;
 
-                cmd = (char)input.read();
+				cmd = (char)input.read();
 
-                // Début de la partie en joueur blanc
-                if(cmd == '1'){
-                    joueur.couleur = true;
-                    byte[] aBuffer = new byte[1024];
+				// Début de la partie en joueur blanc
+				if(cmd == '1'){
+					joueur.couleur = true;
+					byte[] aBuffer = new byte[1024];
 
-                    int size = input.available();
-                    //System.out.println("size " + size);
-                    input.read(aBuffer,0,size);
-                    String s = new String(aBuffer).trim();
-                    System.out.println(s);
-                    String[] boardValues;
-                    boardValues = s.split(" ");
-                    int x=0,y=0;
-                    for(int i=0; i<boardValues.length;i++){
-                        board[x][y] = Integer.parseInt(boardValues[i]);
-                        y++;
-                        if(y == 8){
-                            y = 0;
-                            x++;
-                        }
-                    }
+					int size = input.available();
+					//System.out.println("size " + size);
+					input.read(aBuffer,0,size);
+					String s = new String(aBuffer).trim();
+					System.out.println(s);
+					String[] boardValues;
+					boardValues = s.split(" ");
+					int x=0,y=0;
+					for(int i=0; i<boardValues.length;i++){
+						board[x][y] = Integer.parseInt(boardValues[i]);
+						y++;
+						if(y == 8){
+							y = 0;
+							x++;
+						}
+					}
 
-                    jeu = new Jeu();
-                    //Initialisation du jeu
-                    jeu.construirePlateau(board);
-                    jeu.construireIA();
-                    jeu.ia.couleur=true;
-                    //=========================
-
-
-                    System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
-                    String coup=jeu.ia.jouerCoup();
-                    String move = null;
-                    //move = console.readLine();
-                    move=coup;
-                    output.write(move.getBytes(),0,move.length());
-                    output.flush();
-                    }
-                    // Début de la partie en joueur Noir
-                    if(cmd == '2'){
-                        System.out.println("Nouvelle partie! Vous jouer noir, attendez le coup des blancs");
-                        byte[] aBuffer = new byte[1024];
-                        int size = input.available();
-                        //System.out.println("size " + size);
-                        input.read(aBuffer,0,size);
-                        String s = new String(aBuffer).trim();
-                        System.out.println(s);
-                        String[] boardValues;
-                        boardValues = s.split(" ");
-                        int x=0,y=0;
-                        for(int i=0; i<boardValues.length;i++){
-                            board[x][y] = Integer.parseInt(boardValues[i]);
-                            y++;
-                        if(y == 8){
-                            y = 0;
-                            x++;
-                        }
-                    }
-                        jeu = new Jeu();
-                        //Initialisation du jeu
-                        jeu.construirePlateau(board);
-                        jeu.construireIA();
-                        jeu.ia.couleur=false;
-                        //=========================
-                }
+					jeu = new Jeu();
+					//Initialisation du jeu
+					jeu.construirePlateau(board);
+					//Ajoute les pousseur a leur liste
+					for(int i=0; i<8;i++){
+						for(int j=0; j<8;j++){
+							if(board[j][i] == 2){
+								jeu.ajouterPousseur(new Pousseur(false, j, i));
+							}else if(board[j][i] == 4){
+								jeu.ajouterPousseur(new Pousseur(true, j, i));
+							}
+						}
+					}
+					jeu.construireIA();
+					jeu.ia.couleur=true;
+					//=========================
 
 
-                // Le serveur demande le prochain coup
-                // Le message contient aussi le dernier coup joué.
-                if(cmd == '3'){
-                    byte[] aBuffer = new byte[16];
+					System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
+					String coup=jeu.ia.jouerCoup();
+					String move = null;
+					//move = console.readLine();
+					move=coup;
+					output.write(move.getBytes(),0,move.length());
+					output.flush();
+				}
+				// Début de la partie en joueur Noir
+				if(cmd == '2'){
+					System.out.println("Nouvelle partie! Vous jouer noir, attendez le coup des blancs");
+					byte[] aBuffer = new byte[1024];
+					int size = input.available();
+					//System.out.println("size " + size);
+					input.read(aBuffer,0,size);
+					String s = new String(aBuffer).trim();
+					System.out.println(s);
+					String[] boardValues;
+					boardValues = s.split(" ");
+					int x=0,y=0;
+					for(int i=0; i<boardValues.length;i++){
+						board[x][y] = Integer.parseInt(boardValues[i]);
+						y++;
+						if(y == 8){
+							y = 0;
+							x++;
+						}
+					}
+					jeu = new Jeu();
+					//Initialisation du jeu
+					jeu.construirePlateau(board);
+					//Ajoute les pousseur a leur liste
+					for(int i=0; i<8;i++){
+						for(int j=0; j<8;j++){
+							if(board[j][i] == 2){
+								jeu.ajouterPousseur(new Pousseur(false, j, i));
+							}else if(board[j][i] == 4){
+								jeu.ajouterPousseur(new Pousseur(true, j, i));
+							}
+						}
+					}
+					jeu.construireIA();
+					jeu.ia.couleur=false;
+					//=========================
+				}
 
-                    int size = input.available();
-                    //System.out.println("size " + size);
-                    input.read(aBuffer,0,size);
 
-                    String s = new String(aBuffer);
+				// Le serveur demande le prochain coup
+				// Le message contient aussi le dernier coup joué.
+				if(cmd == '3'){
+					byte[] aBuffer = new byte[16];
 
-                    //Coup du joueur humain
-                    jeu.plateau.updateJoueur(s);
-                    jeu.plateau.afficherBoard();
+					int size = input.available();
+					//System.out.println("size " + size);
+					input.read(aBuffer,0,size);
 
-                    System.out.println("Dernier coup : "+ s);
-                    System.out.println(s);
-                    System.out.println("Entrez votre coup : ");
+					String s = new String(aBuffer);
 
-                    String coup=jeu.ia.jouerCoup();
-                    String move = null;
-                    //move = console.readLine();
-                    move=coup;
+					//Coup du joueur humain
+					jeu.plateau.updateJoueur(s);
+					jeu.plateau.afficherBoard();
 
-                    output.write(move.getBytes(),0,move.length());
-                    output.flush();
-                }
-                // Le dernier coup est invalide
-                if(cmd == '4'){
-                    System.out.println("Coup invalide, entrez un nouveau coup : ");
+					System.out.println("Dernier coup : "+ s);
+					System.out.println(s);
+					System.out.println("Entrez votre coup : ");
 
-                    String coup=jeu.ia.jouerCoup();
-                    String move = null;
-                    //move = console.readLine();
-                    move=coup;
-                    output.write(move.getBytes(),0,move.length());
-                    output.flush();
+					String coup=jeu.ia.jouerCoup();
+					String move = null;
+					//move = console.readLine();
+					move=coup;
 
-                }
-            }
-        }
-        catch (IOException e) {
-            System.out.println(e);
-        }
+					output.write(move.getBytes(),0,move.length());
+					output.flush();
+				}
+				// Le dernier coup est invalide
+				if(cmd == '4'){
+					System.out.println("Coup invalide, entrez un nouveau coup : ");
 
-    }
+					String coup=jeu.ia.jouerCoup();
+					String move = null;
+					//move = console.readLine();
+					move=coup;
+					output.write(move.getBytes(),0,move.length());
+					output.flush();
+
+				}
+			}
+		}
+		catch (IOException e) {
+			System.out.println(e);
+		}
+
+	}
 }
 

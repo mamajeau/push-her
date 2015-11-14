@@ -3,7 +3,11 @@
  */
 public class Pousse extends Pion {
 
-    public Pousse (boolean couleur){
-        super.couleur = couleur;
+    public Pousse (boolean couleur, int x, int y){
+        super(couleur, x, y);
     }
+
+	public boolean getCouleur() {
+		return couleur;
+	}
 }

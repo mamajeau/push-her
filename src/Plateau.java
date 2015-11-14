@@ -11,11 +11,12 @@ public class Plateau implements Cloneable{
     public static int POUSSE_NOIR = 1;
     public static int POUSSEUR_NOIR = 2;
     int[][] board;
+    private ArrayList<Pousseur> pousseurNoir = new ArrayList<Pousseur>();
+    private ArrayList<Pousseur> pousseurBlanc = new ArrayList<Pousseur>();
     Convertisseur conv = Convertisseur.getInstance();
 
     public Plateau(int[][] board){
         this.board = board;
-
         //afficherBoard();
         //afficherCase();
     }
@@ -29,6 +30,16 @@ public class Plateau implements Cloneable{
         }
         return clone;
     }
+    
+    //Fonction pour ajouter un pousseur a la liste de pousseur
+    public void ajouterPousseur(Pousseur pousseur){
+    	if(pousseur.getCouleur()){
+    		pousseurBlanc.add(pousseur);
+    	}else{
+    		pousseurNoir.add(pousseur);
+    	}
+    }
+    
     //Fonction qu'on a a appeler pour generer les mouvements en fonction d'un plateau (Tu vois mamajeau jmets des commentaires)
     public ArrayList<Mouvement> genererMouvements(boolean couleur){
         ArrayList<Mouvement> arrayMouvementsNoirs = new ArrayList<Mouvement>();
@@ -214,7 +225,15 @@ public class Plateau implements Cloneable{
         int colonneArrivee = convertisseur.LettreAChiffre(sousResultat[1].charAt(0));
         int ligneArrivee = 8 - (Integer.parseInt((String)(""+sousResultat[1].charAt(1))));
 
-
+        //Mise a jour des listes de pousseur
+        for(int i = 0; i>=7; i++){
+        	if(pousseurBlanc.get(i).getX() == colonneDepart && pousseurBlanc.get(i).getY() == ligneDepart){
+        		pousseurBlanc.add(i, new Pousseur(true, colonneArrivee, ligneArrivee));
+        	}else if(pousseurNoir.get(i).getX() == colonneDepart && pousseurNoir.get(i).getY() == ligneDepart){
+        		pousseurNoir.add(i, new Pousseur(false, colonneArrivee, ligneArrivee));
+        	}
+        }
+        
         deplacer(ligneDepart,colonneDepart,ligneArrivee,colonneArrivee);
     }
     //Fonction pour deplacer sur les cases et faire la verification

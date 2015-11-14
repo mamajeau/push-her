@@ -19,7 +19,9 @@ public class Jeu {
         this.plateau = new Plateau(board);
     }
 
-
+    public void ajouterPousseur(Pousseur pousseur){
+    	plateau.ajouterPousseur(pousseur);
+    }
 
     private String getId(int ligne, int colonne) {
         String id = "";

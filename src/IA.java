@@ -71,8 +71,9 @@ public class IA {
 
         //On deplace dans notre plateau global
         String deplacement=plateau.deplacer(mouvementAFaire.ligneDepart,mouvementAFaire.colonneDepart,mouvementAFaire.ligneArrivee,mouvementAFaire.colonneArrivee);
+        //Mise a jour des listes de pousseur
+        plateau.miseAJourPousseur(mouvementAFaire.ligneDepart, mouvementAFaire.colonneDepart, mouvementAFaire.ligneArrivee, mouvementAFaire.colonneArrivee);
         
-
         return deplacement;
     }
 }

@@ -226,17 +226,7 @@ public class Plateau implements Cloneable{
 		int ligneArrivee = 8 - (Integer.parseInt((String)(""+sousResultat[1].charAt(1))));
 		
 		//Mise a jour des listes de pousseur
-		for(int i = 0; i<=7; i++){
-			if(pousseurBlanc.get(i).getY() == colonneDepart && pousseurBlanc.get(i).getX() == ligneDepart){
-				System.out.println("Mise a jour");
-				pousseurNoir.remove(i);
-				pousseurBlanc.add(i, new Pousseur(true, ligneArrivee, colonneArrivee));
-			}else if(pousseurNoir.get(i).getY() == colonneDepart && pousseurNoir.get(i).getX() == ligneDepart){
-				System.out.println("Mise a jour " + i);
-				pousseurNoir.remove(i);
-				pousseurNoir.add(i, new Pousseur(false, ligneArrivee, colonneArrivee));
-			}
-		}
+		miseAJourPousseur(ligneDepart, colonneDepart, ligneArrivee, colonneArrivee);
 
 		deplacer(ligneDepart,colonneDepart,ligneArrivee,colonneArrivee);
 	}
@@ -287,5 +277,20 @@ public class Plateau implements Cloneable{
 		System.out.println(blanc);
 		System.out.println(noir);
 	}
-
+	
+	//Fonction pour mettre a jour les pousseur
+	public void miseAJourPousseur(int xDepart, int yDepart, int xArrivee, int yArrivee){
+		for(int i = 0; i<=7; i++){
+			if(pousseurBlanc.get(i).getY() == yDepart && pousseurBlanc.get(i).getX() == xDepart){
+				System.out.println("Mise a jour blanc");
+				pousseurBlanc.remove(i);
+				pousseurBlanc.add(i, new Pousseur(true, xArrivee, yArrivee));
+			}else if(pousseurNoir.get(i).getY() == yDepart && pousseurNoir.get(i).getX() == xDepart){
+				System.out.println("Mise a jour noir");
+				pousseurNoir.remove(i);
+				pousseurNoir.add(i, new Pousseur(false, xArrivee, yArrivee));
+			}
+		}
+	}
+	
 }

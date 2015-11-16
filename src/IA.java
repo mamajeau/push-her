@@ -23,36 +23,40 @@ public class IA {
     public Mouvement choixCoup()
     {
         startTime = System.currentTimeMillis();
-        int[][] board = plateau.board;
+        int[] board = plateau.board;
         Random randomizer = new Random();
         //Minmax represente le noeud racine duquel decoulera le reste de l'arbre
-        minMax = new Noeud(board,null);
+        //minMax = new Noeud(board,null);
         //Appel recursif de la fonction qui va generer les noeuds du minmax
-        genererNoeuds(minMax,plateau,this.couleur);
+       // genererNoeuds(minMax,plateau,this.couleur);
 
-        Mouvement mouvementAFaire = minMax.listeEnfant.get(randomizer.nextInt(minMax.listeEnfant.size())).mouvementFait;
+        //Mouvement mouvementAFaire = minMax.listeEnfant.get(randomizer.nextInt(minMax.listeEnfant.size())).mouvementFait;
+
+        Mouvement mouvementAFaire = new Mouvement(6,1,5,1);
         return mouvementAFaire;
     }
 
     //Fonction qui evaluera un plateau et lui assignera une valeur
-    private int evaluerPlateau(int[][] board){
+    private int evaluerPlateau(int[] board){
         Random randomizer = new Random();
         int poids = randomizer.nextInt(50);
         return poids;
     }
+
+
     //Fonction qui genere le noeuds, racine represente le noeud parents des enfants qui seront attaches. Pour l'instant, on genere
     //un enfant par mouvement possible et on y associe un poid aleatoire. A chaque appel, on inverse la couleur utilisee precedemment.
     private void genererNoeuds(Noeud racine, Plateau p,boolean couleur){
         long stopTime = System.currentTimeMillis();
         //L'arbre va arreter de faire apres 4 secondes
-       if ((stopTime - startTime) > 3000){
+       if ((stopTime - startTime) > 1500){
             return;
         }
         ArrayList<Mouvement> mouvementsPossibles;
         mouvementsPossibles = p.genererMouvements(couleur);
         //Boucle qui creera et associera chaque mouvement possible a la racine passee en parametre
         for (int i = 0; i < mouvementsPossibles.size(); i++) {
-            int[][] boardEnfant = p.deplacerDansBoard(mouvementsPossibles.get(i).ligneDepart, mouvementsPossibles.get(i).colonneDepart, mouvementsPossibles.get(i).ligneArrivee, mouvementsPossibles.get(i).colonneArrivee);
+            int[] boardEnfant = p.deplacerDansBoard(mouvementsPossibles.get(i).ligneDepart, mouvementsPossibles.get(i).colonneDepart, mouvementsPossibles.get(i).ligneArrivee, mouvementsPossibles.get(i).colonneArrivee);
             mouvementsPossibles.get(i).poids = evaluerPlateau(boardEnfant);
             racine.ajouterEnfant(new Noeud(boardEnfant, mouvementsPossibles.get(i)));
         }

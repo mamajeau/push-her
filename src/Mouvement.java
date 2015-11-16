@@ -26,17 +26,19 @@ public class Mouvement {
 
     public void validerCoup(Case depart)
     {
-        Pion pion=depart.occupant;
-        boolean coulJ = depart.occupant.couleur;
+        //Pion pion=depart.occupant;
+        //boolean coulJ = depart.occupant.couleur;
+
         String id = depart.id;
         char letter = id.charAt(0);
         int colonne = convertisseur.LettreAChiffre(letter);
         String stringLigne =  ""+id.charAt(1);
         int ligne = Integer.parseInt(stringLigne);
-        ArrayList<Mouvement> arrayMouvements = new ArrayList<Mouvement>();
 
-        int ligneTempo=ligne+1;
-        int colonneTempo=colonne+1;
+        //ArrayList<Mouvement> arrayMouvements = new ArrayList<Mouvement>();
+
+       // int ligneTempo=ligne+1;
+       // int colonneTempo=colonne+1;
 
         System.out.println("Infomation Mouvement");
         System.out.print(id);
